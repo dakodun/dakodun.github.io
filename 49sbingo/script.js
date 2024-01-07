@@ -14,9 +14,13 @@ const drawsArea = document.querySelector("#Draws");
 
 const returnsArea = document.querySelector("#Returns");
 
+window.addEventListener("load", (e) => {
+  loadLines();
+});
+
 tLine.addEventListener("keydown", (e) => {
   if (e.key === 'Enter' || e.keyCode === 13) {
-    addLine(e);
+    addLine(e, null);
   }
 });
 bLine.addEventListener("click", addLine);
@@ -28,8 +32,12 @@ tDraw.addEventListener("keydown", (e) => {
 });
 bDraw.addEventListener("click", addDraw);
 
-function addLine(e) {
-  let input = tLine.value;
+function addLine(e, numsIn) {
+  let input = numsIn;
+  if (!input) {
+    input = tLine.value;
+  }
+
   let nums = input.split(" ");
 
   try {
@@ -64,6 +72,7 @@ function addLine(e) {
     linesArea.appendChild(linesEntry);
 
     lines.push(nums);
+    saveLines();
     updateReturns();
     tLine.value = "";
   } catch (e) {
@@ -86,6 +95,7 @@ function removeLine(e) {
     }
   }
 
+  saveLines();
   updateReturns();
 }
 
@@ -264,16 +274,41 @@ function updateReturns() {
   }
 }
 
-// check results on add
-  // need to store selections and draws
-// check results on remove
-  // need to be able to remove correct selection/draw
+function loadLines() {
+  let storageString = localStorage.getItem("49slines");
+  //console.log(storageString);
+  if (storageString) {
+    let lineStrings = storageString.split(";");
+    //console.log(lineStrings);
+    for (let ls of lineStrings) {
+      //console.log(ls);
+      addLine(null, ls);
+    }
+  }
+}
 
-// check
-  // for a £2 stake
-    // 4 corners (0, 2, 6, 8) == £1500
-    // line or diagonal == £100
-      // 0, 1, 2
-      // 3, 4, 5
-      // 6, 7, 8
-    // and 4 from 9 == £25
+function saveLines() {
+  let storageString = "";
+  for (let l of lines) {
+    let lineString = "";
+    for (let n of l) {
+      lineString += n;
+      lineString += " ";
+    }
+
+    if (lineString != "") {
+      storageString += lineString.slice(0, -1);
+      storageString += ";";
+    }
+  }
+
+  localStorage.setItem("49slines", storageString.slice(0, -1));
+}
+
+// for a £2 stake
+  // 4 corners (0, 2, 6, 8) == £1500
+  // line or diagonal == £100
+    // 0, 1, 2
+    // 3, 4, 5
+    // 6, 7, 8
+  // and 4 from 9 == £25

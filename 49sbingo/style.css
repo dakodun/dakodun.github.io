@@ -6,10 +6,17 @@ html {
 body {
 	height: 100%;
 	margin: 0px;
+
+  font-size: 16px;
 }
 
 hr {
   color: rgb(79, 124, 73);
+}
+
+strong {
+  font-weight: 700;
+  font-style: italic;
 }
 
 #Wrapper {
