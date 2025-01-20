@@ -1,0 +1,7 @@
+name = "chikin"
+license = "zlib"
+description = "chikin.net"
+
+[author]
+  name = "iain crawford"
+  homepage = "chikin.net"

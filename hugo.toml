@@ -1,0 +1,15 @@
+baseURL = "https://chikin.net/"
+languageCode = "en-gb"
+title = "c h i k i n . n e t"
+theme = "chikin"
+disableKinds = ["sitemap", "RSS", "taxonomy"]
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+
+[menu]
+  [[menu.main]]
+    name = "SIDE A"
+    weight = 11

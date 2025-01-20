@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+	<head>
+	<title id="title">c h i k i n . n e t</title>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="stylesheet" 
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,700;1,400;1,700&display=swap"> 
+	<link rel="stylesheet" type="text/css" href="/style.css" />
+  <script type="module" src="/themes.js"></script>
+  <script type="module" src="/shark.js"></script>
+	
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+  {{ hugo.Generator }}
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="not-footer">
+      <div id="theme-control">
+        <!-- <button type="button" id="theme-button-bee" class="theme-button">Bee</button> -->
+        <button type="button" id="theme-button-sea" class="theme-button" disabled>Sea</button>
+      </div>
+
+      <div id="header">
+        {{ partial "nav" . }}
+
+        <span id="logo">
+          <span id="logo-img"><img id="logo-img_" src="/img/logo_.png" /></span>
+          <span id="logo-text">Non-sea-nse</span>
+        </span>
+      </div>
+
+      {{ partial "nav-small" . }}

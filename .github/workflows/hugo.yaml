@@ -1,0 +1,106 @@
+name: source -> main (via hugo)
+
+on:
+  push:
+    branches:
+      - source
+  
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "chikin.net"
+  cancel-in-progress: true
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.141.0
+    steps:
+      - name: Install Hugo CLI
+        run: |
+          wget -O ${{ runner.temp }}/hugo.deb https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb \
+          && sudo dpkg -i ${{ runner.temp }}/hugo.deb
+      
+      - name: Install Dart Sass
+        run: sudo snap install dart-sass
+      
+      # checkout files in source branch
+      - name: checkout source
+        uses: actions/checkout@v4
+        with:
+          ref: source
+      
+      - name: Install Node.js dependencies
+        run: "[[ -f package-lock.json || -f npm-shrinkwrap.json ]] && npm ci || true"
+      
+      - name: Build with Hugo
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
+          HUGO_ENVIRONMENT: production
+          TZ: America/Los_Angeles
+        run: |
+          hugo \
+            --gc \
+            --minify
+      
+      # tar files before uploading
+      - name: tar files
+        run: tar -cvf public.tar ./public
+      
+      # upload generated content (./public) as artefact
+      - name: upload artefact
+        uses: actions/upload-artifact@v4
+        with:
+          name: publictar
+          path: public.tar
+          overwrite: true
+          if-no-files-found: error
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      # checkout files in main branch
+      - name: checkout main
+        uses: actions/checkout@v4
+        with:
+          ref: main
+      
+      # clear it
+      - name: clear current
+        run: rm -rf *
+
+      # download tar file containing content
+      - name: download artefact
+        uses: actions/download-artifact@v4
+        with:
+          name: publictar
+
+      # extract files from tar (to current directory)
+      - name: extract files
+        run: tar -xvf public.tar --strip-components 2
+
+      # test output
+      - name: test output
+        run: ls -R
+      
+      # remove tar file
+      - name: remove public.tar
+        run: rm public.tar
+      
+      # commit/push new files to main
+      - name: commit new files
+        run: |
+          git config --global user.name 'auto'
+          git config --global user.email 'auto@chikin.net'
+          git add --all
+          git commit -m "generated from 'source'"
+          git push

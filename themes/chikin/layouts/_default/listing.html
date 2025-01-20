@@ -1,0 +1,13 @@
+{{ partial "top" . }}
+
+<div id="main">
+  <div class="square-list">
+    {{ range $i := .Site.Pages.ByDate.Reverse }}
+      {{ if (eq $i.Params.menu.main.parent $.Params.menu.main.name) }}
+        <a href="{{ $i.RelPermalink }}" class="square-item"><span>{{ $i.Title }}</span></a>
+      {{ end }}
+    {{ end }}
+  </div>
+</div>
+
+{{ partial "bottom" . }}
