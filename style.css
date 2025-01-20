@@ -91,11 +91,14 @@ hr {
 
 
 #wrapper {
+  display: grid;
+  grid-template: auto 1fr auto / 100%;
+
+  min-height: 100vh;
+
   position: relative;
-	height: 100%;
-	margin: 0px auto;
-	
-	box-sizing: border-box;
+  margin: 0px auto;
+  box-sizing: border-box; 
 }
 
 
@@ -393,15 +396,14 @@ hr {
 }
 
 
-#not-footer {
-  min-height: calc(100vh - 56px);
-}
-
 #footer {
+  font-size: 14px;
+
   margin: 0px auto;
   padding-left: 16px;
   padding-right: 16px;
 	text-align: center;
+  vertical-align: bottom;
 }
 
 @media only screen and (max-width: 799px) {
