@@ -87,10 +87,6 @@ jobs:
       # extract files from tar (to current directory)
       - name: extract files
         run: tar -xvf public.tar --strip-components 2
-
-      # test output
-      - name: test output
-        run: ls -R
       
       # remove tar file
       - name: remove public.tar
