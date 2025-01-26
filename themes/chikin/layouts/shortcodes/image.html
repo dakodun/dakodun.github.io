@@ -1,0 +1,11 @@
+<!-- place an image as a background -->
+
+{{ $src := .Get "src" | default "" }}
+
+{{ $width := .Get "width" }}
+{{ $height := .Get "height" }}
+
+<span class="bg-img"  style="--url: url('{{ $src }}');
+  --width: {{ $width }}; --height: {{ $height }};">
+  <img class="bg-img-hidden" src="{{ $src | safeURL }}" />
+</span>
