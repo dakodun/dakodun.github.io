@@ -1,0 +1,73 @@
+<!-- i made this as a way to parse permalinks to page
+resources in markdown before i found the embedded ref
+shortcode which already does it (differently, but better)
+
+there are also better ways to achieve this effect in custom
+shortcode, i've only kept this as it may be useful as a reference
+for other shortcodes
+
+it works by first parsing the content for all "control" links 
+in the form [[text:path]] and adding them to a map then removing
+them from the content
+
+then it looks for "content" links in the form [[text]], matching
+key in the map, and replaces them with the permalink to the
+matching resource (value in map)
+
+use "[id]: \{\{% ref "path/to/res/" %\}\} (alt-text)" instead -->
+
+<!-- store inner content and create a new map -->
+{{ $content := .Inner }}
+{{ $linkMap := newScratch }}
+
+<!-- get all "control" links from content and iterate -->
+{{ $links := findRE `\[\[(.*?:.*?)\]\]` $content }}
+{{ range $links }}
+  <!-- trim the control characters ('[[' and ']]') from
+  the link and split at delimiter (':') -->
+  {{ $link := trim . "[[]]" }}
+  {{ $parts := split $link ":" }}
+
+  <!-- if link had both parts then add it to our map -->
+  {{ if (and (index $parts 0) (index $parts 1)) }}
+    {{ $linkMap.Set (index $parts 0) (index $parts 1) }}
+  {{ end }}
+
+  <!-- remove the link from the content -->
+  {{ $content = replace $content . `` }}
+{{ end }}
+
+<!-- get all "content" links from content and iterate -->
+{{ $links = findRE `\[\[(.*?)\]\]` $content }}
+{{ range $links }}
+  <!-- trim the control characters ('[[' and ']]') and retrieve
+  the matching value from the map -->
+  {{ $key := trim . "[[]]" }}
+  {{ $value := $linkMap.Get $key }}
+
+  {{ if $value }}
+    {{ $anchor := `` }}
+
+    <!-- the encompassing html -->
+    {{ $b := `<a href="` }}
+    {{ $m := `">` }}
+    {{ $e := `</a>` }}
+    
+    <!-- try and find the resource -->
+    {{ $resource := $.Site.GetPage $value }}
+
+    <!-- if the resource exists the construct the new anchor element -->
+    {{ if $resource }}
+      {{ $anchor = printf "%s" $e | printf "%s%s" $key |
+      printf "%s%s" $m | printf "%s%s" $resource.RelPermalink |
+      printf "%s%s" $b | printf "%s" }}
+    {{ end }}
+    
+    <!-- replace the link in the content with either the new anchor
+    element or blank "" -->
+    {{ $content = replace $content . $anchor }}
+  {{ end }}
+
+{{ end }}
+
+{{ $content | safeHTML }}

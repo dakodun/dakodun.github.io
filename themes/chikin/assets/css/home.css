@@ -1,0 +1,184 @@
+:root {
+  --home-homebox-grid:
+    'a c' 32px
+    'b c' 32px
+    'd d' auto
+    / 0.5fr 0.5fr;
+  
+  --home-leftcol-align: right;
+  --home-rightcol-align: left;
+
+  --home-text-offset: 4px;
+  --home-sea-margin: 10px auto 0px;
+  --home-marker-disp: block;
+  --home-hr-margin: 10px auto 6px;
+}
+
+/* screen size and other media rules... */
+@media only screen and (max-width: 450px) {
+:root {
+  --home-homebox-grid:
+    'a' 32px
+    'b' 32px
+    'c' 64px
+    'd' auto
+    / 1fr;
+  
+  --home-leftcol-align: center;
+  --home-rightcol-align: center;
+
+  --home-text-offset: 2px;
+  --home-sea-margin: 8px auto 0px;
+  --home-marker-disp: none;
+  --home-hr-margin: 6px auto 6px;
+}
+}
+
+@media only screen and (min-width: 451px) and (max-width: 700px) {
+:root {
+  --home-homebox-grid:
+    'a' 32px
+    'b' 32px
+    'c' 64px
+    'd' auto
+    / 1fr;
+  
+  --home-leftcol-align: center;
+  --home-rightcol-align: center;
+
+  --home-text-offset: 2px;
+  --home-sea-margin: 8px auto 0px;
+  --home-marker-disp: none;
+  --home-hr-margin: 6px auto 6px;
+}
+}
+
+@media only screen and (min-width: 701px) {
+:root {
+  --home-homebox-grid:
+    'a c' 32px
+    'b c' 32px
+    'd d' auto
+    / 0.5fr 0.5fr;
+  
+  --home-leftcol-align: right;
+  --home-rightcol-align: left;
+
+  --home-text-offset: 4px;
+  --home-sea-margin: 10px auto 0px;
+  --home-marker-disp: block;
+  --home-hr-margin: 10px auto 6px;
+}
+}
+
+.homebox {
+  --bgcolor: color-mix(in oklab, var(--theme-bgcolor) 20%, transparent);
+
+  width: 90%;
+  margin: 0px auto 16px;
+  padding: 8px;
+
+  display: grid;
+  grid: var(--home-homebox-grid);
+  gap: 12px 10px;
+
+  background: var(--bgcolor);
+
+  border-radius: 16px;
+}
+
+.homebox hr {
+  width: 100%;
+  height: 4px;
+
+  margin: var(--home-hr-margin);
+  padding: 0px;
+
+  background-image:
+    radial-gradient(
+      ellipse at center top,
+      var(--theme-color) 10%,
+      transparent 40%
+    );
+
+  border-style: none;
+  border-width: 0px;
+}
+
+.homebox > div:nth-child(1) {
+  width: 100%;
+
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: 4px;
+  word-spacing: 2px;
+  line-height: 2.6rem;
+  text-align: var(--home-leftcol-align);
+
+  grid-area: a;
+
+  position: relative;
+  left: var(--home-text-offset);
+}
+
+.homebox > div:nth-child(2) {
+  width: 100%;
+
+  margin: 0px auto;
+
+  text-align: var(--home-leftcol-align);
+
+  grid-area: b;
+}
+
+.homebox > div:nth-child(3) {
+  width: 100%;
+
+  margin: var(--home-sea-margin);
+
+  justify-content: var(--home-rightcol-align);
+
+  grid-area: c;
+
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.homebox > div:nth-child(4) {
+  width: 100%;
+
+  text-align: justify;
+  hyphens: auto;
+
+  grid-area: d;
+}
+
+.homebox > div:nth-child(4) p {
+  margin: 0px auto 8px;
+  padding: 0px 16px;
+}
+
+.homebox .marker {
+  --bgcolor: color-mix(in oklab, var(--theme-color) 15%, transparent);
+
+  width: 36px;
+  height: 100%;
+
+  margin: 0px 0px 0px 8px;
+  
+  box-sizing: border-box;
+
+  background: repeating-linear-gradient(
+    120deg,
+    var(--bgcolor),
+    var(--bgcolor) 1px,
+    transparent 2px,
+    transparent 4px,
+    var(--bgcolor) 5px
+  );
+
+  border-radius: 2px;
+
+  display: var(--home-marker-disp);
+}
+/* ... */

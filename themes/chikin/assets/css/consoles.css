@@ -1,0 +1,686 @@
+:root {
+  /* --- */
+  --console-grid: 100% / 128px 1fr;
+  --console-icon-display: flex;
+
+  --console-bgcolor: #9494CA;
+  --console-bgcolor-dark: #3F2D5A;
+  --console-accent: #A1A1A19A;
+
+  --console-bgcolor-alt: #95C098;
+  --console-bgcolor-alt-dark: #2A4936;
+  --console-accent-alt: #ACACAC9A;
+
+  --console-border: #39495A;
+
+  --console-color: #EDEEF3;
+  --console-font-size: 2.5rem;
+  --console-letter-spacing: 8px;
+
+  /* light */
+  --light-console-backing: #E0E0E4AA;
+
+  /* dark */
+  --dark-console-backing: #1A1F298F;
+
+  /* theme */
+  --theme-console-backing: var(--light-console-backing);
+}
+
+
+/* screen size and other media rules */
+@media (prefers-color-scheme: dark) {
+:root {
+  --theme-console-backing: var(--dark-console-backing);
+}
+}
+
+@media only screen and (max-width: 450px) {
+:root {
+  --console-grid: auto / auto;
+  --console-icon-display: none;
+
+  --console-font-size: 2.0rem;
+  --console-letter-spacing: 4px;
+}
+}
+
+@media only screen and (min-width: 451px) and (max-width: 700px) {
+:root {
+  --console-grid: auto / auto;
+  --console-icon-display: none;
+
+  --console-font-size: 2.5rem;
+  --console-letter-spacing: 8px;
+}
+}
+
+@media only screen and (min-width: 701px) {
+:root {
+  --console-grid: auto / 128px 1fr;
+  --console-icon-display: flex;
+
+  --console-font-size: 2.5rem;
+  --console-letter-spacing: 8px;
+}
+}
+
+
+/* . --- --- --- --- --- --- --- . */
+/* | BEGIN CONSOLES STYLING  ... | */
+/* '-----------------------------' */
+/* CONSOLES LIST WRAPPER */
+.consoles .consoles-list {
+  width: 100%;
+  height: auto;
+
+  position: relative;
+}
+
+
+/* CONSOLE LIST ITEM */
+.consoles .list-item {
+  width: 100%;
+
+  display: grid;
+  grid-template: var(--console-grid);
+  gap: 0px 8px;
+
+  padding: 32px 0px 0px 0px;
+
+  /* allows checkbox to be positioned according to its
+  list-item wrapper */
+  position: relative;
+}
+
+.consoles .list-item + .list-item {
+  margin: 32px 0px 0px;
+}
+
+/* LIST ITEM - ICON */
+/* ICON - IMAGE */
+.consoles .item-icon {
+  width: 100%;
+  height: 128px;
+
+  position: relative;
+  z-index: 0;
+
+  display: var(--console-icon-display);
+  align-items: center;
+  justify-content: center;
+}
+
+.consoles .icon-image {
+  margin: 0px;
+  padding: 0px;
+
+  position: absolute;
+  
+  z-index: 10;
+
+  display: var(--console-icon-display);
+}
+
+.consoles .icon-image div {
+  --bgimg: "";
+  --anim: none;
+
+  /* fit image into icon box (128x128) */
+  width: 110px;
+  height: 110px;
+  
+  margin: 0px;
+  padding: 0px;
+
+  background-image: var(--bgimg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+
+  /* dull the icon image down a little to blend in better */
+  filter: grayscale(30%) opacity(90%);
+}
+
+@keyframes console-icon-spin {
+  /* animation that causes the image to rotate around its center
+  point - apply via --anim variable */
+
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
+}
+
+.consoles .icon-image div:hover {
+  /* animate the image on hover (if applicable) */
+  animation: var(--anim);
+}
+
+/* ICON - BOX (TOP) */
+.consoles .icon-box-top {
+  width: 100%;
+  height: 64px;
+
+  margin: 0px;
+  padding: 0px;
+
+  background: var(--theme-console-backing);
+
+  border-radius: 16px 16px 0px 0px;
+  border-color: var(--console-bgcolor);
+  border-width: 4px 4px 0px 4px;
+  border-style: solid;
+  box-sizing: border-box;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  z-index: 10;
+}
+
+.consoles .list-item:nth-child(2n) .icon-box-top {
+  /* every even numbered console-item should use an
+  alternate colour scheme */
+  border-color: var(--console-bgcolor-alt);
+}
+
+/* ICON - BOX (BOTTOM) */
+.consoles .icon-box-bottom {
+  width: 100%;
+  height: 64px;
+
+  margin: 0px;
+  padding: 0px;
+
+  background: var(--theme-console-backing);
+
+  border-radius: 0px 0px 16px 0px;
+  border-color: var(--console-border);
+  border-width: 0px 4px 4px 4px;
+  border-style: solid;
+  box-sizing: border-box;
+
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+
+  z-index: 5;
+}
+
+
+/* LIST ITEM - CONTENT */
+/* CONTENT - EXPAND */
+.consoles .content-expand {
+  margin: 0px;
+  padding: 3px 3px 3px 5px;
+
+  background-color:
+    var(--console-border);
+
+  border-color: var(--console-border);
+  border-style: solid;
+  border-width: 3px 3px 0px 3px;
+  border-radius: 4px 16px 0px 0px;
+
+  /* position at the top right of the console-item, making
+  use of the space left by its padding */
+  position: absolute;
+  top: 1px;
+  right: 16px;
+}
+
+/* EXPAND - CHECKBOX */
+.consoles .expand-checkbox {
+  appearance: none;
+
+  /* checkbox should cover whole parent element */
+  width: 100%;
+  height: 100%;
+
+  margin: 0px;
+  padding: 0px;
+
+  border-radius: 4px 16px 0px 0px;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  /* checkbox should sit above all siblings to take all
+  pointer events */
+  z-index: 10;
+  cursor: pointer;
+}
+
+/* EXPAND - LABEL */
+.consoles .expand-label {
+  /* label is text and icon showing current state of its parent
+  console-item (expanded/collapsed) - sits below its checkbox */
+
+  margin: 0px;
+
+  cursor: pointer;
+
+  letter-spacing: 2px;
+
+  position: relative;
+  top: 0px;
+  right: 0px;
+}
+
+.consoles .expand-checkbox:hover ~ .expand-label,
+.consoles .expand-checkbox:focus ~ .expand-label {  
+  /* when checkbox (which fully encompasses label) is hovered,
+  modify label to show interactivity */
+  font-style: italic;
+}
+
+.consoles .expand-label::after {
+  content: "Expand";
+
+  padding: 0px 24px 0px 0px;
+
+  /* clever use of gradient/image background and masking
+  allows us to use the sam .svg icons as backgrounds and
+  change its colour */
+
+  background-image:
+    linear-gradient(
+      270deg, 
+      var(--dark-color) 22px,
+      transparent 22px,
+      transparent
+    );
+
+  mask-image: 
+    linear-gradient(
+      90deg, 
+      white calc(100% - 24px),
+      transparent calc(100% - 24px),
+      transparent
+    ),
+
+    url("/site/gaming/expand-down.svg");
+
+  mask-repeat: no-repeat;
+  mask-position: right center;
+  mask-size: contain;
+
+  color: var(--dark-color);
+}
+
+.expand-checkbox:checked ~ .expand-label::after {
+  /* change the content and mask file when checked
+  to indicate console entry is currently expanded */
+
+  content: "Collapse";
+
+  mask-image:
+    linear-gradient(
+      90deg, 
+      white calc(100% - 24px),
+      transparent calc(100% - 24px),
+      transparent
+    ),
+
+    url("/site/gaming/expand-up.svg");
+}
+
+/* CONTENT - HEADER */
+.consoles .content-header {
+  height: 64px;
+
+  margin: 0px;
+
+  color: var(--console-color);
+  font-size: var(--console-font-size);
+  font-weight: 500;
+  letter-spacing: var(--console-letter-spacing);
+  text-shadow: #09080cc9 0px 3px 4px;
+
+  border-radius: 4px 16px 0px 0px;
+  border-color: var(--console-border);
+  border-width: 4px 4px 0px 4px;
+  border-style: solid;
+  box-sizing: border-box;
+
+  position: relative;
+  z-index: 0;
+
+  overflow: hidden;
+
+  /* display header text centrally on both axes */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.consoles .content-header::before {
+  content: "";
+
+  width: 100%;
+  height: 100%;
+
+  background-image:
+    repeating-linear-gradient(
+      transparent,
+      transparent 4px,
+      var(--console-accent-alt) 4px,
+      var(--console-accent-alt) 6px
+    ),
+    linear-gradient(
+      135deg,
+      var(--console-bgcolor),
+      var(--console-bgcolor)
+    );
+  
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
+}
+
+.consoles .list-item:nth-child(2n) .content-header::before {
+  background-image:
+    repeating-linear-gradient(
+      transparent,
+      transparent 4px,
+      var(--console-accent) 4px,
+      var(--console-accent) 6px
+    ),
+    linear-gradient(
+      135deg,
+      var(--console-bgcolor-alt),
+      var(--console-bgcolor-alt)
+    );
+}
+
+.consoles .content-header::after {
+  content: "";
+
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
+
+  background-image:
+    linear-gradient(
+      var(--console-bgcolor-dark) 12px,
+      transparent
+    );
+  
+  border-radius: 0px 10px 0px 0px;
+
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  z-index: -1;
+}
+
+.consoles .list-item:nth-child(2n) .content-header::after {
+  background-image:
+    linear-gradient(
+      var(--console-bgcolor-alt-dark) 12px,
+      transparent
+    );
+}
+
+
+/* CONTENT - DETAIL */
+.consoles .content-detail {
+  max-height: 60px;
+  
+  margin: 0px;
+  padding: 16px 16px;
+
+  background-color: var(--theme-console-backing);
+
+  border-radius: 0px 0px 4px 16px;
+  border-color: var(--console-border);
+  border-width: 4px 4px 4px 4px;
+  border-style: solid;
+  box-sizing: border-box;
+
+  hyphens: auto; 
+  overflow: hidden;
+}
+
+.consoles .content-expand:has(.expand-checkbox:checked) ~
+.content-detail {
+  max-height: none;
+}
+
+.consoles .content-detail hr {
+  width: 100%;
+  height: calc(1rem + 2px);
+
+  text-align: center;
+  line-height: 1rem;
+
+  border: 0px;
+  
+  position: relative;
+}
+
+.consoles .content-detail hr::after {
+  content: "⬤ ⬤ ⬤";
+  color: color-mix(in oklab, var(--theme-color) 70%, transparent);
+  letter-spacing: 3px;
+}
+
+.consoles .content-detail p {
+  margin: 0px;
+  padding: 0px;
+
+  font-size: 1.0rem;
+  text-indent: 1.8rem;
+}
+
+.consoles .content-detail ul {
+  margin: 0px;
+  padding: 0px 0px 0px 16px;
+
+  font-size: 1.1rem;
+  text-indent: 0.8rem;
+}
+
+.consoles .content-detail ul ul {
+  margin: 0px;
+  padding: 0px 0px 0px 16px;
+
+  font-size: 1.0rem;
+  text-indent: 0.8rem;
+
+  list-style: none;
+}
+
+.consoles .content-detail a {
+  visibility: hidden;
+}
+
+.consoles .content-expand:has(.expand-checkbox:checked) ~
+.content-detail a {
+  visibility: visible;
+}
+
+.consoles .content-detail ul li + li {
+  /* spacing between top-level list items */
+  margin: 16px 0px 0px;
+}
+
+.consoles .content-detail ul ul li + li {
+  /* spacing between 2nd-level list items */
+  margin: 2px 0px 0px;
+}
+
+.consoles .content-detail ul li ul {
+  /* spacing between top and 2nd level lists */
+  margin: 0px 0px 0px;
+}
+
+.consoles .content-detail p + .detail-thumbbar {
+  margin: 24px 0px 0px;
+}
+
+.consoles .content-detail p + p,
+.consoles .content-detail ul + ul,
+.consoles .content-detail ul + p,
+.consoles .content-detail p + ul,
+.consoles .content-detail hr + hr,
+.consoles .content-detail hr + p,
+.consoles .content-detail p + hr,
+.consoles .content-detail hr + ul,
+.consoles .content-detail ul + hr {
+  margin: 24px 0px 0px;
+}
+
+
+/* THUMBNAIL BAR */
+.consoles .detail-thumbbar {
+  --size: 96px;
+  --gap: 4px;
+
+  width: 100%;
+  height: auto;
+  min-height: var(--size);
+
+  padding: calc(4px + var(--gap)) 0px 4px;
+
+  background-image:
+    linear-gradient(
+      transparent var(--gap),
+      var(--console-bgcolor-dark) var(--gap),
+      var(--console-bgcolor-dark)
+    );
+
+  border-radius: 0px;
+  border-color: var(--console-border);
+  border-width: 4px 0px 0px;
+  border-style: solid;
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: end;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px 12px;
+
+  position: relative;
+  z-index: 0;
+}
+
+/* THUMBNAIL */
+.consoles .thumbbar-thumb {
+  --src: url("");
+
+  width: var(--size);
+  height: var(--size);
+
+  background-image: var(--src);
+  background-position: center 0%;
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  border-radius: 18px;
+
+  position: relative;
+  z-index: 2;
+
+  cursor: pointer;
+
+  transition: background-size 0.2s linear;
+}
+
+.consoles .thumbbar-thumb.lazy_ {
+  background-image: none;
+}
+
+.consoles .thumbbar-thumb:hover,
+.consoles .thumbbar-thumb:focus {
+  background-size: 130%;
+
+  transition: background-size 0.8s ease-out;
+}
+
+.consoles .thumbbar-thumb::after {
+  content: "";
+
+  width: var(--size);
+  height: var(--size);
+  
+  background-color: #12142400;
+
+  border-radius: 16px;
+  border-color: #131316DD;
+  border-width: 4px;
+  border-style: solid;
+  box-sizing: border-box;
+
+  display: block;
+  position: relative;
+  z-index: 1;
+
+  transition:
+    border-width 0.2s linear,
+    background-color 0.2s linear;
+}
+
+.consoles .thumbbar-thumb:hover::after,
+.consoles .thumbbar-thumb:focus::after {
+  background-color: #121424AA;
+
+  border-width: 16px 4px;
+  
+  transition:
+    border-width 0.6s ease-out,
+    background-color 0.7s linear;
+}
+
+.consoles .thumbbar-thumb::before {
+  --offset: calc(var(--size) * 0.5);
+
+  content: "";
+
+  width: var(--size);
+  height: var(--size);
+  
+  background-image: url("/site/gaming/zoom-in.svg");
+  background-position: var(--offset) var(--offset);
+  background-repeat: no-repeat;
+  background-size: 60%;
+
+  display: block;
+  position: absolute;
+  z-index: 2;
+
+  opacity: 0%;
+  
+  transition:
+    opacity 0.2s linear;
+}
+
+.consoles .thumbbar-thumb:hover::before,
+.consoles .thumbbar-thumb:focus::before {
+  opacity: 80%;
+  
+  transition:
+    opacity 0.3s linear;
+}
+
+.consoles .list-item:nth-child(2n) .detail-thumbbar {
+  background-image:
+    linear-gradient(
+      transparent 4px,
+      var(--console-bgcolor-alt-dark) 4px,
+      var(--console-bgcolor-alt-dark)
+    );
+}
+/* . --- --- --- --- --- --- --- . */
+/* | ...    END CONSOLES STYLING | */
+/* '-----------------------------' */

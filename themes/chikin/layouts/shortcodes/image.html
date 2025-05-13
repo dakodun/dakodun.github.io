@@ -1,11 +1,11 @@
 <!-- place an image as a background -->
 
-{{ $src := .Get "src" | default "" }}
+{{ $src := .Get 0 | default "" }}
+{{ $width := .Get 1 | default "auto" }}
+{{ $height := .Get 2 | default "auto" }}
+{{ $alt := .Get 3 | default "" }}
 
-{{ $width := .Get "width" }}
-{{ $height := .Get "height" }}
-
-<span class="bg-img"  style="--url: url('{{ $src }}');
-  --width: {{ $width }}; --height: {{ $height }};">
-  <img class="bg-img-hidden" src="{{ $src | safeURL }}" />
-</span>
+<div class="image" style="--bg: url('{{ $src }}');
+--width: {{ $width }}; --height: {{ $height }};">
+  
+</div>

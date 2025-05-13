@@ -1,0 +1,219 @@
+:root {
+  /* --- */
+  --halfcircle-size: 440px;
+  --gamingbottom-arrow-disp: inline-block;
+
+  /* light */
+  --light-gaming-text: url("/site/gaming/gaming-text.png");
+  --light-gaming-arrow: url("/site/gaming/arrow.png");
+
+  /* dark */
+  --dark-gaming-text: url("/site/gaming/gaming-text-d.png");
+  --dark-gaming-arrow: url("/site/gaming/arrow-d.png");
+
+  /* theme */
+  --theme-gaming-text: var(--light-gaming-text);
+  --theme-gaming-arrow: var(--light-gaming-arrow);
+}
+
+
+/* screen size and other media rules */
+@media (prefers-color-scheme: dark) {
+:root {
+  --theme-gaming-text: var(--dark-gaming-text);
+  --theme-gaming-arrow: var(--dark-gaming-arrow);
+}
+}
+
+@media only screen and (max-width: 450px) {
+:root {
+  --halfcircle-size: 220px;
+  --gamingbottom-arrow-disp: none;
+}
+}
+
+@media only screen and (min-width: 451px) and (max-width: 700px) {
+:root {
+  --halfcircle-size: 330px;
+  --gamingbottom-arrow-disp: none;
+}
+}
+
+@media only screen and (min-width: 701px) {
+:root {
+  --halfcircle-size: 440px;
+  --gamingbottom-arrow-disp: inline-block;
+}
+}
+/* ... */
+
+/* gaming page... */
+/* elements that formulate the core of the gaming page */
+
+/* top half of the page contains the circle elements */
+.gamingtop {
+  display: flex;
+  justify-content: center;
+}
+
+.gamingtop .halfcircle {
+  --size: var(--halfcircle-size);
+  --sizeby2: calc(var(--size) * 0.5);
+
+  width: var(--size);
+  height: var(--size);
+
+  position: relative;
+}
+
+.gamingtop .halfcircle .upper {
+  width: var(--size);
+  height: var(--sizeby2);
+
+  background-image: url("/site/gaming/gaming.png");
+  background-position: center 0%;
+  background-repeat: no-repeat;
+  background-size: 100.5%;
+  
+  border-radius: var(--sizeby2) var(--sizeby2) 0px 0px;
+
+  transform-origin: 50% 100%;
+  transform: rotate(315deg);
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  transition:
+    top 0.05s linear,
+    left 0.05s linear;
+}
+
+.gamingtop .halfcircle .upper:hover,
+.gamingtop .halfcircle .upper:focus {
+  top: -4px;
+  left: -4px;
+
+  transition:
+    top 0.2s ease-out,
+    left 0.2s ease-out;
+}
+
+.gamingtop .halfcircle .uppertext {
+  pointer-events: none;
+
+  width: var(--size);
+  height: var(--sizeby2);
+
+  background-image: var(--theme-gaming-text);
+  background-position: center 0%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+  border-radius: var(--sizeby2) var(--sizeby2) 0px 0px;
+
+  transform-origin: 50% 100%;
+  transform: rotate(315deg);
+
+  position: absolute;
+  top: -16px;
+  left: -48px;
+
+  transition:
+    top 0.4s ease-out,
+    left 0.4s ease-out;
+}
+
+.gamingtop .halfcircle .lower {
+  width: var(--size);
+  height: var(--sizeby2);
+
+  background-image: url("/site/gaming/gaming.png");
+  background-position: center 100%;
+  background-repeat: no-repeat;
+  background-size: 100.5%;
+
+  border-radius: var(--sizeby2) var(--sizeby2) 0px 0px;
+
+  transform-origin: 50% 100%;
+  transform: rotate(135deg);
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  transition:
+    top 0.05s linear,
+    left 0.05s linear;
+}
+
+.gamingtop .halfcircle .lower:hover,
+.gamingtop .halfcircle .lower:focus {
+  top: 4px;
+  left: 4px;
+
+  transition:
+    top 0.2s ease-out,
+    left 0.2s ease-out;
+}
+
+.gamingtop .halfcircle .lowertext {
+  pointer-events: none;
+  
+  width: var(--size);
+  height: var(--sizeby2);
+
+  background-image: var(--theme-gaming-text);
+  background-position: center 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  border-radius: var(--sizeby2) var(--sizeby2) 0px 0px;
+
+  transform-origin: 50% 100%;
+  transform: rotate(135deg);
+
+  position: absolute;
+  top: 16px;
+  left: 48px;
+
+  transition:
+    top 0.4s ease-out,
+    left 0.4s ease-out;
+}
+
+/* bottom half is the text and flavour */
+.gamingbottom {
+  display: grid;
+  grid-template: 100% / 0.5fr 0.5fr;
+  justify-content: center;
+  gap: 0px 48px;
+
+  margin: 24px 0px 0px;
+}
+
+.gamingbottom .textcolumn {
+  text-align: justify;
+  hyphens: auto; 
+  text-indent: 1.8rem;
+
+  position: relative;
+}
+
+.gamingbottom .bold {
+  font-weight: bold;
+}
+
+.gamingbottom .arrow {
+  width: 120px;
+  height: 120px;
+
+  background-image: var(--theme-gaming-arrow);
+
+  position: absolute;
+  top: -130px;
+  left: 180px;
+
+  display: var(--gamingbottom-arrow-disp);
+}
+/* ...gaming page */

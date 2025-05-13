@@ -1,80 +1,83 @@
 +++
+title = "chikin.net"
+layout = ""
+date = 2000-01-01
+type = ""
+
+[params]
+  stylesheets = [ "css/home.css" ]
+
 [menu.main]
 	name = "HOME"
 	weight = 1
 +++
 
-{{< main >}}
-  <div style="text-align: center;">
-    <div style="padding-top: 26px; padding-bottom: 32px;
-    position: relative">
-      <div style="position: relative; z-index: 2; margin-top: 16px;">
-        <div style="margin-bottom: 24px">
-          <span style="font-family: 'Comfortaa', serif;font-weight: bold;">
-            <span style="font-size: 38px; font-weight: 600;
-            color: rgb(12, 8, 20);
-            text-shadow: 0px 4px 6px #00000088;">CHIKIN</span><span
-            style="font-size: 28px; font-weight: 400;
-            color: rgb(var(--main-color));
-            text-shadow: 0px 4px 6px #00000088;">.NET</span>
-          </span>
-          <br />
-          <span style="font-size: 18px; font-weight: 500;
-          letter-spacing: 4px; word-spacing: 6px;">Iain Crawford</span>
-          <br />
-        </div>
+<div style="width: 100%; height: 300px; background: #AAAAAA00;
+position: absolute; top: 0px; left: 0px;">
+</div>
 
-        {{< button url="https://github.com/dakodun" bgcolor="#3A363E"
-        color="#EDEEF3" glowcolors="#F14EAA, #82DD0C, #F14EAA"
-        width="220px" height="32px" >}}
-          <div style="display: flex; justify-content: space-between;">
-            <div style="background-size: 24px;
-            background-image: url('/site/github-mark-white.svg');
-            background-position: center;
-            background-repeat: no-repeat;
-            display: block;">
-              <img src="/site/github-mark-white.svg"
-              style="width: 24px; visibility: hidden;
-              display: block; flex-grow: 0;" />
-            </div>
+{{< main backing="#00000000" >}}
 
-            <div style="flex-grow: 2;">
-              Find me on GitHub
-            </div>
-            
-            <div style="flex-grow: 1;">
-              <!-- I'm blank, just for positioning! -->
-            </div>
-          </div>
-        {{< /button >}}
-        
-        <div style="margin: 8px auto 0px; line-height: 190%;
-        max-width: 400px;">
-          <span class="tag" style="--bgcolor: #00000011;
-          --color: #FFFFFF; --hilite: #FF55BB 30%">Programming</span>
-
-          <span class="tag" style="--bgcolor: #00000011;
-          --color: #FFFFFF; --hilite: #AAFFBB 40%">Retro</span>
-
-          <span class="tag" style="--bgcolor: #00000011;
-          --color: #FFFFFF; --hilite: #FFDD22 35%">Technology</span>
-
-          <span class="tag" style="--bgcolor: #00000011;
-          --color: #FFFFFF; --hilite: #33FF33 45%">Gaming</span>
-
-          <span class="tag" style="--bgcolor: #00000011;
-          --color: #FFFFFF; --hilite: #11BBFF 40%">Sports</span>
-
-          <span class="tag" style="--bgcolor: #00000011;
-          --color: #FFFFFF; --hilite: #FF3333 50%">Stuff</span>
-        </div>
-      </div>
-
-      <div style="position: relative; z-index: 1;">
-        <div class="backing" style="--size: 240px; --voffset: -208px">
-          <!-- I paint a background over the central content! -->
-        </div>
-      </div>
-    </div>
+<div class="homebox">
+  <div>
+    Iain Crawford
   </div>
+
+  <div>
+  {{< button url="https://github.com/dakodun" bgcolor="#3A363E"
+  color="#EDEEF3" glowcolors="#F14EAA, #82DD0C, #F14EAA"
+  width="200px" height="100%" >}}
+    <div style="width: 28px; height: 24px;
+    background-size: contain;
+    background-image: url('/site/github-mark-white.svg');
+    background-position: right center;
+    background-repeat: no-repeat;
+    flex-grow: 0; align-self: center;">
+      <!-- I'm a background image! -->
+    </div>
+    <div style="flex-grow: 1; align-self: center; text-align: center;">
+      Find me on GitHub
+    </div>
+    <div style="width: 28px; flex-grow: 0;">
+      <!-- I'm blank, just for positioning! -->
+    </div>
+  {{< /button >}}
+  </div>
+
+  <div>
+  {{< button url="/themepark/sea" bgcolor="#0F6E8C"
+  color="#FAFAFF" glowcolors="#0A0A0AAA, #0A0A0AAA"
+  width="154px" height="100%" target="_self" >}}
+    <div style="align-self: center; text-align: center;">
+      View an alternate version of this page
+    </div>
+  {{< /button >}}
+
+  <div class="marker">
+  </div>
+  </div>
+
+  <div>
+  {{< home/blurb >}}
+  ---
+  While I designed and implemented this website primarily using Firefox on Windows,
+  I further tested it on Windows with Chrome and Edge, on Android with Firefox,
+  Chrome and Samsung Internet, and with GNOME Web on Linux ensuring I
+  covered a wide range of the platforms, browser engines and implementations
+  available to me.
+  
+  It should look and function the same irrespective of how you choose to view
+  it, as long as JavaScript is enabled and the device width is greater than
+  300px; even then, I've made every effort to display the content correctly
+  without JavaScript, but you will lose some functionality.
+
+  You can view the source files in the [repository][src] on my GitHub,
+  on the (orphaned) _source_ branch.
+
+  [src]: https://github.com/dakodun/dakodun.github.io/tree/source (htllo)
+  
+  {{< /home/blurb >}}
+</div>
+</div>
+
 {{< /main >}}

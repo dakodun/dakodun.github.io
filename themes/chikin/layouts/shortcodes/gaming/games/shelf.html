@@ -1,0 +1,97 @@
+<!-- relative paths of resource folders  -->
+{{ $contentloc := "conq/" }}
+{{ $iconsloc   := "conq/icons/" }}
+
+<!-- get a list of all content files in conq folder  -->
+{{ $md_ := printf "%s" "*-cnt.md" |
+           printf "%s%s" $contentloc |
+           printf "%s" }}
+{{ $md  := $.Page.Resources.Match $md_ }}
+
+<div class="top-info" style="margin: 32px auto 0px;">
+  <div>
+    This is my shelf — <em>the Shelf of Conquest</em> — where I keep all of
+    the games I've beat. You can mouse over them for a closer look, or tap
+    them if you're on mobile.
+  </div>
+</div>
+
+<div class="shelf">
+  <div class="shelf-left-p">
+    <!--  -->
+  </div>
+
+  <div>
+    <div class="shelf-top">
+      <!-- I'm structurally important! -->
+    </div>
+
+    <div class="shelf-body">
+      <div class="shelf-left">
+        <!--  -->
+      </div>
+
+      <div id="shelf-c" class="shelf-contents">
+        <!-- placeholder image for when i've not got around to
+        making the actual one yet (sorry) -->
+        {{ $deficon_ := printf "%s" "default.png" |
+                        printf "%s%s" $iconsloc |
+                        printf "%s" }}
+        {{ $deficon  := $.Page.Resources.GetMatch $deficon_ }}
+
+        {{ $deficonURL := "" }}
+        {{ if $deficon }}
+          {{ $deficonURL = $deficon.RelPermalink }}
+        {{ end }}
+
+        <!-- for all conquered games (*-cnt.md) -->
+        {{ range $md }}
+          <!-- get the icon matching content name from resources -->
+          {{ $icon_ := printf "%s" "-sm.png" |
+                        printf "%s%s" .Params.id |
+                        printf "%s%s" $iconsloc |
+                        printf "%s" }}
+          {{ $icon  := $.Page.Resources.GetMatch $icon_ }}
+          
+          {{ $plat   := .Params.platform | default "" }}
+          {{ $width  := 120 }}
+          {{ $height := 240 }}
+          
+          {{ if eq $plat "Wii" }}
+            {{ $width = 100 }}
+          {{ end }}
+
+          <!-- set icon to default until overridden -->
+          {{ $iconURL := $deficonURL }}
+          {{ if $icon }}
+            {{ $iconURL = $icon.RelPermalink }}
+          {{ end }}
+
+          <div class="shelf-item lazy" alt="{{ .Params.name }} Shelf Item"
+          title="{{ .Params.name }}"
+          style="--background: url('{{ $iconURL }}');
+          --width: {{ $width }}px; --height: {{ $height }}px;">
+            <!--  -->
+            <div class="item-tabber" tabindex="0"></div>
+          </div>
+        {{ end }}
+
+        <div class="shelf-right-p">
+          <!--  -->
+        </div>
+      </div>
+
+      <div class="shelf-right">
+        <!--  -->
+      </div>
+    </div>
+
+    <div class="shelf-bottom">
+      <!-- I'm (slightly less) structurally important! -->
+    </div>
+  </div>
+</div>
+
+<div class="shelf-base">
+  <!--  -->
+</div>

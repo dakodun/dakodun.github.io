@@ -1,0 +1,79 @@
+{{ define "wrapper" }}
+  <div id="wrapper">
+{{ end }}
+
+{{ define "header" }}
+  {{ partial "header-small" . }}
+{{ end }}
+
+{{ define "content" }}
+<div class="content">
+  <div class="main">
+    <div class="top-info">
+      <div>
+        <em>'Posts'</em> are articles I've wrote discussing my experiences with
+        topics such as implementing programming techniques, working with
+        technologies, restoring and modding gaming consoles, etc. <em>'Projects'</em>
+        are either landing pages for (or post write-ups of) programming
+        related projects that usually come with an accompanying GitHub
+        repository. <em>'Resources'</em> are where I dump non-programming stuff I've
+        made — such as music or 3D models — that might be useful to someone.
+      </div>
+    </div>
+
+    <!-- group pages all pages by type -->
+    {{ range .Site.Pages.GroupByParam "type" }}
+      <!-- get this first page in the group -->
+      {{ $first := (index .Pages 0)}}
+
+      <!-- check parent to see if group belongs on this listing -->
+      {{ if (eq $first.Params.menu.main.parent $.Params.menu.main.name) }}
+        <!-- begin the group list -->
+        <div class="square-list">
+          <div class="list-type">
+            <span></span>
+            <div>{{ strings.FirstUpper $first.Params.type }}s</div>
+            <span></span>
+          </div>
+
+          <div class="list-icon">
+            <span></span>
+            <div style="--icon-img: url('/img/{{ $first.Type }}-icon.svg');">
+
+            </div>
+            <span></span>
+          </div>
+
+        <!-- iterate all pages in the group and add them ordered
+        from newest to oldest-->
+        {{ range .ByDate.Reverse }}
+          <div class="list-item">
+            <a class="item-top" href="{{ .RelPermalink }}">
+              <div class="top-date">
+                {{ .Date | time.Format "2 January, 2006" }}
+              </div>
+
+              <div class="top-title">
+                {{ .Title }}
+              </div>
+
+              <hr />
+            </a>
+
+            <div class="item-bottom">
+              <div class="bottom-summary">
+                {{ if .Params.summary }}
+                  {{ .Summary }}
+                {{ end }}
+              </div>
+            </div>
+          </div>
+        {{ end }}
+
+        <!-- close the group list -->
+        </div>
+      {{ end }}
+    {{ end }}
+  </div>
+</div>
+{{ end }}

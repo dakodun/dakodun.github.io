@@ -1,4 +1,6 @@
-<!-- main content area -->
-<div id="main" class="{{ .Get "class" }}">
+{{ $backing := .Get "backing" | default "var(--theme-main-backing)" }}
+
+<!-- Main content area -->
+<div class="main" style="--backing: {{ $backing | safeCSS }}">
   {{ .Inner }}
 </div>

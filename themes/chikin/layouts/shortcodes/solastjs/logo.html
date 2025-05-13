@@ -1,0 +1,12 @@
+<!-- place an image as a background -->
+
+{{ $width := .Get 0 | default "auto" }}
+{{ $height := .Get 1 | default "auto" }}
+{{ $alt := .Get 2 | default "" }}
+
+<!-- hugo doesn't like spaces between tags in nested
+shortcodes -->
+<div class="solastjs-logo-base"
+style="--width: {{ $width }}; --height: {{ $height }};">
+  <div class="solastjs-logo-top" alt="{{ $alt }}"></div>
+</div>

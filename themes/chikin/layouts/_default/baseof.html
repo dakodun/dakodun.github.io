@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+	<head>
+	<title id="title">c h i k i n . n e t</title>
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  {{ if .Param "fonts" }}
+    {{ range .Params.fonts }}
+      <link href="{{ . }}" rel="stylesheet">
+    {{ end }}
+  {{ end }}
+
+  <!-- CSS -->
+    {{ $style := (resources.Get "css/style.css") }}
+
+    <!-- minify/sri fingerprint stylesheet in production -->
+    {{ if not hugo.IsServer }}
+      {{ $style = $style | minify | fingerprint }}
+    {{ end }}
+
+    <link rel="stylesheet" type="text/css" href="{{ $style.RelPermalink }}"
+    integrity="{{ $style.Data.Integrity }}"/>
+
+    <!-- repeat for any stylesheets specific to the page -->
+    {{ range .Params.stylesheets }}
+      {{ $css := (resources.Get .) }}
+      {{ if not hugo.IsServer }}
+        {{ $css = $css | minify | fingerprint }}
+      {{ end }}
+
+      <link rel="stylesheet" type="text/css" href="{{ $css.RelPermalink }}"
+      integrity="{{ $css.Data.Integrity }}"/>
+    {{ end }} 
+  <!-- CSS -->
+
+
+  <!-- JS -->
+    {{ $themecontrol := (resources.Get "js/themecontrol.js") }}
+    
+    <!-- minify/sri fingerprint script in production -->
+    {{ if not hugo.IsServer }}
+      {{ $themecontrol = $themecontrol | minify | fingerprint }}
+    {{ end }}
+
+    <script src="{{ $themecontrol.RelPermalink }}"
+    integrity="{{ $themecontrol.Data.Integrity }}">
+
+    </script>
+
+    <!-- repeat for any scripts specific to the page -->
+    {{ range .Params.scripts }}
+      {{ $js := . }}
+      
+      {{ $scr := (resources.Get (index $js 0)) }}
+      {{ $type := (index $js 1) }}
+      
+      {{ if not hugo.IsServer }}
+        {{ $scr = $scr | minify | fingerprint }}
+      {{ end }}
+
+      <script src="{{ $scr.RelPermalink }}" type="{{ $type }}"
+      integrity="{{ $scr.Data.Integrity }}">
+      
+      </script>
+    {{ end }} 
+  <!-- JS -->
+  
+	
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+  {{ hugo.Generator }}
+
+  <script>
+    initTheme();
+  </script>
+</head>
+
+<body>
+  <!-- Apparently this prevents FOUC, seems to work so I
+  didn't question it -->
+  <script>0</script>
+
+  {{ block "wrapper" . }}
+  
+  {{ end }}
+  
+    {{ block "header" . }}
+
+    {{ end }}
+
+    {{ block "content" . }}
+
+    {{ end }}
+    
+    {{ partial "footer" . }}
+  </div>
+</body>
+</html>

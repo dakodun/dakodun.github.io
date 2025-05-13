@@ -8,8 +8,3 @@ disableKinds = ["sitemap", "RSS", "taxonomy"]
   [markup.goldmark]
     [markup.goldmark.renderer]
       unsafe = true
-
-[menu]
-  [[menu.main]]
-    name = "SIDE A"
-    weight = 11

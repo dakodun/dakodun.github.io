@@ -1,0 +1,18 @@
+{{ $label := .Get 0 | markdownify }}
+{{ $content := .Inner }}
+
+<div class="codebox">
+  <div class="codes">
+    <pre><code>{{ $content }}</code></pre>
+  </div>
+  
+  {{ if $label }}
+    <hr />
+    
+    <div class="codelabel">
+      <div></div>
+      <div>{{ $label }}</div>
+      <div></div>
+    </div>
+  {{ end }}
+</div>

@@ -1,11 +1,15 @@
-<nav id="nav">
-  {{ range $i := .Site.Menus.main }}
-    {{ if (or ($.HasMenuCurrent "main" .) ($.IsMenuCurrent "main" .)) }}
-      <a href="{{ .URL |relURL }}" class="nav-current">{{ .Name }}</a>
-    {{ else if (ne $i.Page nil) }}
-      <a href="{{ .URL |relURL }}">{{ .Name }}</a>
-    {{ else }}
-      <span class="nav-inactive">{{ .Name }}</span>
-    {{ end }}
-  {{ end }}
+<nav id="nav-small">
+{{ range $i := .Site.Menus.main }}
+{{ if (or ($.HasMenuCurrent "main" .) ($.IsMenuCurrent "main" .)) }}
+  <a href="{{ .URL |relURL }}" class="nav-current">
+    <div>{{ .Name }}</div>
+  </a>
+{{ else if (ne $i.Page nil) }}
+  <a href="{{ .URL |relURL }}">
+    <div>{{ .Name }}</div>
+  </a>
+{{ else }}
+  <div class="nav-inactive">{{ .Name }}</div>
+{{ end }}
+{{ end }}
 </nav>

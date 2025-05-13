@@ -1,0 +1,56 @@
+:root {
+    --light-sol-bg:
+      linear-gradient(
+        135deg,
+        #ACB4C9 40%,
+        #C2C6D1
+      );
+    
+    --dark-sol-bg:
+      linear-gradient(
+        135deg,
+        #D3D6DD 40%,
+        #828094
+      );
+    
+    --theme-sol-bg: var(--light-sol-bg);
+}
+
+@media (prefers-color-scheme: dark) {
+:root {
+  --theme-sol-bg: var(--dark-sol-bg);
+}
+}
+
+.solastjs-logo-base {
+  --width: auto;
+  --height: auto;
+
+  width: 100%;
+  max-width: var(--width);
+  height: var(--height);
+
+  margin: 0px auto;
+  padding: 0px;
+
+  background-image: url("/site/solastjs/logo-solastjs.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  position: relative;
+}
+
+.solastjs-logo-top {
+  width: 100%;
+  height: 100%;
+
+  background-image: var(--theme-sol-bg);
+  
+  mask-image: url("/site/solastjs/logo-solastjs-mask.svg");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: cover;
+
+  position: relative;
+}

@@ -1,0 +1,1481 @@
+:root {
+  /* --- */
+  --games-table-grid: repeat(2, 1fr);
+  --games-control-grid:
+    "a b" auto
+    "c c" auto
+    / 0.5fr 0.5fr;
+  
+  --games-control-footer-disp: block;
+
+
+  /* --- */
+  --games-entry-height-c: 120px;
+  --games-entry-name-c: 1.6rem;
+  --games-entry-platform-c: 1.2rem;
+  --games-hr-disp-c: initial;
+  --games-simp-text-c: 1.0rem;
+
+  --games-entry-height-r: 48px;
+  --games-entry-name-r: 1.0rem;
+  --games-entry-platform-r: 0.95rem;
+  --games-hr-disp-r: none;
+  --games-simp-text-r: 0.875rem;
+
+  --games-entry-height: var(--games-entry-height-c);
+  --games-entry-name: var(--games-entry-name-c);
+  --games-entry-platform: var(--games-entry-platform-c);
+  --games-hr-disp: var(--games-hr-disp-c);
+  --games-simp-text: var(--games-simp-text-c);
+
+  
+  /* light--- */
+  --light-games-shadow: #1A1A3340;
+
+  --light-games-coverbg: #bebec9b4;
+  --light-games-infobg: #bebec4;
+  --light-games-offcolor: #48494e;
+  --light-games-flip-back: #D6D6DD;
+
+  --light-games-controls-hilite: #e28998;
+  --light-games-controls-color-alt: #F5F5FF;
+  --light-games-controls-grey: #999999;
+
+  --light-games-main-color-light: #9197aa;
+  --light-games-main-color: #66666d;
+  --light-games-main-color-dark: #3c3c44;
+  --light-games-content-color-light: #a4a7ac;
+  --light-games-content-color: #83868a;
+  --light-games-content-color-dark: #787a7c;
+
+  /* dark--- */
+  --dark-games-shadow: #000004A0;
+
+  --dark-games-coverbg: #121213ec;
+  --dark-games-infobg: #28272b;
+  --dark-games-offcolor: #7d7f83;
+  --dark-games-flip-back: #0B0B14;
+
+  --dark-games-controls-hilite: #CCE4FF;
+  --dark-games-controls-color-alt: #0A0A0F;
+  --dark-games-controls-grey: #AAAAAA;
+
+  --dark-games-main-color-light: #3c3d42;
+  --dark-games-main-color: #212124;
+  --dark-games-main-color-dark: #0F0F13;
+  --dark-games-content-color-light: #545658;
+  --dark-games-content-color: #3b3838;
+  --dark-games-content-color-dark: #151518;
+
+  /* theme--- */
+  --theme-games-shadow: var(--light-games-shadow);
+
+  --theme-games-coverbg: var(--light-games-coverbg);
+  --theme-games-infobg: var(--light-games-infobg);
+  --theme-games-offcolor: var(--light-games-offcolor);
+  --theme-games-flip-back: var(--light-games-flip-back);
+
+  --theme-games-controls-hilite: var(--light-games-controls-hilite);
+  --theme-games-controls-color-alt: var(--light-games-controls-color-alt);
+  --theme-games-controls-grey: var(--light-games-controls-grey);
+
+  --theme-games-main-color-light:
+    var(--light-games-main-color-light);
+  --theme-games-main-color:
+    var(--light-games-main-color);
+  --theme-games-main-color-dark:
+    var(--light-games-main-color-dark);
+  --theme-games-content-color-light:
+    var(--light-games-content-color-light);
+  --theme-games-content-color:
+    var(--light-games-content-color);
+  --theme-games-content-color-dark:
+    var(--light-games-content-color-dark);
+}
+
+
+/* screen size and other media rules */
+@media (prefers-color-scheme: dark) {
+:root {
+  --theme-games-shadow: var(--dark-games-shadow);
+
+  --theme-games-coverbg: var(--dark-games-coverbg);
+  --theme-games-infobg: var(--dark-games-infobg);
+  --theme-games-offcolor: var(--dark-games-offcolor);
+  --theme-games-flip-back: var(--dark-games-flip-back);
+
+  --theme-games-controls-hilite: var(--dark-games-controls-hilite);
+  --theme-games-controls-color-alt: var(--dark-games-controls-color-alt);
+  --theme-games-controls-grey: var(--dark-games-controls-grey);
+
+  --theme-games-main-color-light:
+    var(--dark-games-main-color-light);
+  --theme-games-main-color:
+    var(--dark-games-main-color);
+  --theme-games-main-color-dark:
+    var(--dark-games-main-color-dark);
+  --theme-games-content-color-light:
+    var(--dark-games-content-color-light);
+  --theme-games-content-color:
+    var(--dark-games-content-color);
+  --theme-games-content-color-dark:
+    var(--dark-games-content-color-dark);
+}
+}
+
+@media only screen and (max-width: 450px) {
+:root {
+  --games-table-grid: 1fr;
+  --games-control-grid:
+    "a" auto
+    "b" auto
+    "c" auto
+    / 1.0fr;
+  
+  --games-control-footer-disp: none;
+}
+}
+
+@media only screen and (min-width: 451px) and (max-width: 700px) {
+:root {
+  --games-table-grid: 1fr;
+  --games-control-grid:
+    "a" auto
+    "b" auto
+    "c" auto
+    / 1.0fr;
+  
+  --games-control-footer-disp: none;
+}
+}
+
+@media only screen and (min-width: 701px) {
+:root {
+  --games-table-grid: repeat(2, 1fr);
+  --games-control-grid:
+    "a b" auto
+    "c c" auto
+    / 0.5fr 0.5fr;
+  
+  --games-control-footer-disp: block;
+}
+}
+
+
+/* controls... */
+.controls {
+  width: 90%;
+
+  margin: 0px auto 16px;
+  
+  box-sizing: border-box;
+
+  position: relative;
+}
+
+.controls-nojs {
+  --width: calc(100% - 24px);
+  --height: calc(100% - 32px);
+
+  --color: color-mix(
+    in oklab,
+    var(--theme-games-controls-grey) 50%,
+    transparent
+  );
+}
+
+.controls-nojs::before {
+  content: "";
+
+  width: var(--width);
+  height: var(--height);
+
+  background-image: 
+    repeating-linear-gradient(
+      135deg,
+      var(--color) 0px,
+      var(--color) 1px,
+      #AAAAAA00 2px,
+      #AAAAAA00 5px,
+      var(--color) 6px
+    );
+  
+  position: absolute;
+  left: 12px;
+  bottom: 10px;
+}
+
+.controls-nojs::after {
+  content: "Enable JavaScript to access table controls...";
+
+  width: var(--width);
+  height: auto;
+
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-align: center;
+
+  position: absolute;
+  right: 12px;
+  bottom: 26px;
+}
+
+
+.controls fieldset {
+  display: grid;
+  grid: var(--games-control-grid);
+  gap: 20px 32px;
+  
+  border-style: solid;
+  border-color: var(--theme-games-controls-grey);
+}
+
+.controls-nojs fieldset {
+  height: 128px;
+}
+
+
+.controls fieldset legend {
+  padding: 0px 8px;
+  color: var(--theme-games-controls-grey);
+}
+
+
+/* --- */
+.controls .controls-group {
+  --grid-area: auto;
+
+  width: 100%;
+  height: 100%;
+  
+  grid-area: var(--grid-area);
+  justify-self: center;
+  align-self: start;
+
+  /* making the controls-group flex allows us to fill the
+  remaining height of the grid-area (useful for style box) */
+  display: flex;
+  flex-direction: column;
+}
+
+/* if we have don't have javascript then hide the controls
+as they do nothing (this class is deleted from element
+if javascript is enabled) */
+.controls-nojs .controls-group {
+  display: none;
+}
+
+.controls-group .group-heading {
+  --color: color-mix(
+    in oklab,
+    var(--theme-games-controls-grey) 50%,
+    transparent
+  );
+
+  margin: 0px 0px 8px;
+
+  background-image: 
+    repeating-linear-gradient(
+      135deg,
+      var(--color) 0px,
+      var(--color) 1px,
+      #AAAAAA00 2px,
+      #AAAAAA00 5px,
+      var(--color) 6px
+    );
+
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.controls-group .group-body {
+  text-align: center;
+}
+/* --- */
+
+
+/* form elements--- */
+/* sort "radioboxes"~~~ */
+.group-body-sort {
+  display: grid;
+  grid-template: auto / 1fr 1fr;
+  gap: 2px;
+
+  position: relative;
+}
+
+.controls-div-radiobox {
+  position: relative;
+}
+
+/* radio button styling */
+.controls-div-radiobox .controls-radiobox {
+  /* the radio button for our custom "radiobox" controls
+  exists in the dom only for function and not form */
+  appearance: none;
+
+  margin: 0px;
+  padding: 0px;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  pointer-events: none;
+
+  /* size the checkbox for the purpose of tabbing/focussing */  
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* label styling when not selected */
+.controls-div-radiobox label {
+  --color: var(--theme-games-controls-grey);
+
+  width: 100%;
+  height: 100%;
+
+  padding: 5px 0px 8px;
+  
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 2px;
+  border-color: var(--color);
+
+  /* specify position so ::after child can fill width/height
+  and be positioned correctly */
+  position: relative;
+
+  /* a label is inline by default which disables setting
+  width and height */
+  display: block;
+
+  user-select: none;
+  cursor: pointer;
+
+  /* create local stacking context in order to
+  place ::after child beneath */
+  z-index: 0;
+}
+
+.controls-div-radiobox label div:nth-child(1) {
+  font-size: 1.1rem;
+  line-height: 1.1rem;
+
+  pointer-events: none;
+}
+
+.controls-div-radiobox label div:nth-child(2) {
+  font-size: 0.8rem;
+  line-height: 0.8rem;
+  letter-spacing: 4px;
+
+  pointer-events: none;
+}
+
+/* label styling when selected */
+.controls-div-radiobox .controls-radiobox:checked + label {
+  color: var(--theme-games-controls-color-alt);
+}
+
+.controls-div-radiobox .controls-radiobox:checked + label::after {
+  --inset: 6px;
+  --offset: calc(var(--inset) * 0.5);
+
+  content: "";
+
+  width: calc(100% - var(--inset));
+  height: calc(100% - var(--inset));
+
+  background: var(--color);
+
+  position: absolute;
+  top: var(--offset);
+  left: var(--offset);
+
+  z-index: -1;
+}
+
+/* */
+.controls-div-radiobox:hover label,
+.controls-div-radiobox:active label,
+.controls-div-radiobox:focus-within label {
+  --color: var(--theme-games-controls-hilite);
+}
+/* ~~~sort "radioboxes" */
+
+
+/* radio buttons~~~ */
+/* apply custom flex properties specifically to the style options */
+.group-body-style {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 32px;
+}
+
+/* set the display to flex within each individual style option to align
+the checkbox with the label */
+.controls-div-radio {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+
+/* prevent selecting the text of the labels in the style options
+and show a pointer on hover */
+.controls-div-radio label {
+  user-select: none;
+  cursor: pointer;
+}
+
+
+.controls-radio {
+  --color: var(--theme-games-controls-grey);
+
+  appearance: none;
+
+  width: 20px;
+  height: 20px;
+
+  margin: 0px;
+
+  background-image:
+    radial-gradient(
+      circle at center,
+      transparent 7px,
+      var(--color) 8px,
+      var(--color) 9px,
+      transparent 10px
+    );
+  
+  border-radius: 51%;
+
+  position: relative;
+  top: 3px;
+
+  cursor: pointer;
+  user-select: none;
+
+  display: block;
+}
+
+.controls-radio::after {
+  content: "";
+
+  width: 10px;
+  height: 10px;
+
+  position: absolute;
+  left: 5px;
+  top: 5px;
+
+  background-image: 
+    radial-gradient(
+      circle at center,
+      var(--color) 5px,
+      transparent 6px
+    );
+  
+  border-radius: 51%;
+
+  opacity: 0%;
+}
+
+.controls-radio:checked::after {
+  content: "";
+
+  opacity: 100%;
+}
+
+.controls-radio:hover,
+.controls-radio:active,
+.controls-radio:focus {
+  --color: var(--theme-games-controls-hilite);
+}
+
+/* the footer is only visible on a wide viewport in the
+style grid-area, and is purely decorative */
+.group-body-footer {
+  --color: color-mix(
+    in oklab,
+    var(--theme-games-controls-grey) 50%,
+    transparent
+  );
+  
+  width: 100%;
+
+  margin: 26px 0px 0px;
+  
+  background-image: repeating-linear-gradient(
+    135deg,
+    var(--color) 0px,
+    var(--color) 1px,
+    #AAAAAA00 2px,
+    #AAAAAA00 5px,
+    var(--color) 6px
+  );
+  
+  display: var(--games-control-footer-disp);
+  flex-grow: 1;
+}
+/* ~~~radio buttons */
+
+
+/* filter checkboxes~~~ */
+/* apply custom flex properties specifically to the filter options */
+.group-body-filter {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px 16px;
+}
+
+/* set the display to flex within each individual filter option to align
+the checkbox with the label */
+.controls-div-checkbox {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 6px;
+}
+
+/* prevent selecting the text of the labels in the filter options
+and show a pointer on hover */
+.controls-div-checkbox label {
+  user-select: none;
+  cursor: pointer;
+}
+
+/* styling for the checkbox itself (checked/unchecked and
+hover/active), remove inline-block display to prevent extra
+whitespace (flex display of parent replaces this behaviour) */
+.controls-checkbox {
+  --color: var(--theme-games-controls-grey);
+
+  appearance: none;
+
+  margin: 0px;
+
+  width: 20px;
+  height: 20px;
+
+  box-sizing: border-box;
+  border-color: var(--color);
+  border-width: 2px;
+  border-style: solid;
+  border-radius: 4px;
+
+  position: relative;
+  top: 3px;
+
+  cursor: pointer;
+
+  display: block;
+}
+
+.controls-checkbox::after {
+  /* this is cool but some browsers use a big ugly green
+  checkmark which can't be styled so use an svg mask instead */
+  /* content: "✔"; */
+
+  content: "";
+
+  width: 12px;
+  height: 12px;
+  
+  /* color: var(--color);
+  font-size: 1rem; */
+
+  background: var(--color);
+
+  mask-image: url("/site/gaming/games/checkmark.svg");
+  mask-position: center;
+  mask-repeat: no-repeat;
+  mask-size: 100%;
+
+  position: absolute;
+  left: 2px;
+  top: 2px; 
+
+  opacity: 0%;
+}
+
+.controls-checkbox:checked::after {
+  /* content: "✔"; */
+  content: "";
+
+  opacity: 100%;
+}
+
+.controls-checkbox:hover,
+.controls-checkbox:active,
+.controls-checkbox:focus {
+  --color: var(--theme-games-controls-hilite);
+}
+/* ~~~filter checkboxes */
+/* ---form elements */
+/* ...controls */
+
+
+
+/* . --- --- --- --- --- --- . */
+/* | BEGIN TABLE STYLING ... | */
+/* '-------------------------' */
+/* TABLE WRAPPER */
+.table {
+  /* styling for the table which holds the individual
+  cards - simple grid based layout */
+
+  width: 100%;
+  max-height: 480px;
+
+  padding: 4px;
+
+  box-sizing: border-box;
+  border-radius: 14px;
+  border: 2px var(--theme-games-controls-grey) dashed;
+
+  /* 2 columns of cards on a wide display, single column otherwise */
+  display: grid;
+  grid-template-columns: var(--games-table-grid);
+  grid-template-rows: auto;
+  gap: 4px;
+
+  overflow-y: auto;
+}
+
+.table p {
+  /* remove any default paragraph margin/padding styling
+  that will interfere with our card layout */
+
+  margin: 0px;
+  padding: 0px;
+}
+
+
+/* RADIO BUTTON */
+.card-radio {
+  /* the radio button element that drives card interaction
+  with regards to highlighting, selecting and flipping */
+
+  appearance: none;
+
+  /* radio button fully encompasses the actual card content
+  (but not the grid space which appears when adjacent card size
+  is bigger) */
+  width: 100%;
+  height: 100%;
+
+  margin: 0px;
+  padding: 0px;
+
+  box-sizing: border-box;
+  border-radius: 10px;
+
+  position: absolute;
+  top: 0px;
+  left: 0px;
+
+  /* radio button should sit above most other elements
+  in order to display highlight when tab selecting */
+  z-index: 10;
+
+  cursor: pointer;
+}
+
+.card-radio:checked {
+  /* when radio button is checked there is no interaction
+  with it so show this via a cursor change */
+  cursor: default;
+}
+
+
+/* CARD WRAPPER */
+.table .table-card {
+  /* a card in the table - this is just a wrapper around content
+  that forms the card (cover and info, or front and back, for
+  a regular "content" card - "instruction" card is unique) */
+  
+  width: 100%;
+  height: 100%;
+
+  position: relative;
+
+  /* background is visible when an adjacent card is expanded */
+  background:
+    repeating-linear-gradient(
+      #52525220 0px,
+      #52525220 2px,
+      transparent 3px,
+      transparent 6px,
+      #52525220 7px
+    );
+
+  box-sizing: border-box;
+  border-radius: 10px;
+
+  /* when an expanded card grows due to its content, this will
+  align the adjacent card to the bottom rather than the top */
+  display: flex;
+  align-items: end;
+}
+
+.table .card-hidden {
+  /* used to hide cards when using the filter controls */
+  display: none;
+}
+
+.table .table-card-content {
+  /* a wrapper around the content necessary for proper styling -
+  correctly limiting radio button height but allowing background
+  to fully cover grid space */
+
+  /* 'fit-content' here stops the radio button from filling the
+  entire grid space, instead only covering the actual card content */
+  width: 100%;
+  height: fit-content;
+
+  position: relative;
+
+  box-sizing: border-box;
+  border-radius: 10px;
+}
+
+
+/* CARD CONTENT */
+.table-card .table-card-content label {
+  /* the label exists for function only and doesn't need
+  to be displayed */
+  display: none;
+}
+
+/* CARD CONTENT - INSTRUCTION SELECTED */
+.table-card-content .card-simp {
+  --border: 4px;
+
+  width: 100%;
+  min-height: var(--games-entry-height);
+
+  padding: 6px 12px;
+  
+  background-image:
+    linear-gradient(
+      135deg,
+      #aeb7b9,
+      #828388,
+      #87878b
+    );
+  
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: background-size 0.1s linear;
+
+  font-size: var(--games-simp-text);
+
+  box-sizing: border-box;
+  border-radius: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  user-select: none;
+
+  position: relative;
+  top: 0px;
+  left: 0px;
+  
+  z-index: 0;
+
+  hyphens: auto; 
+  overflow: hidden;
+}
+
+.table-card-content .card-simp::after {
+  /* display a fade over the background of the card to allow name,
+  platform and barcode to be more easily visible */
+
+  --borderx2: calc(var(--border) * 2);
+
+  content: "";
+
+  width: calc(100% - var(--borderx2));
+  height: calc(100% - var(--borderx2));
+
+  position: absolute;
+  top: var(--border);
+  left: var(--border);
+
+  box-sizing: border-box;
+  background-color: var(--theme-games-coverbg);
+  border-radius: 6px;
+
+  z-index: -1;
+}
+
+.card-radio:hover ~ .card-simp::after,
+.card-radio:active ~ .card-simp::after,
+.card-radio:focus ~ .card-simp::after {
+  background-color:
+    color-mix(
+      in oklab,
+      var(--theme-games-coverbg) 75%,
+      var(--theme-games-controls-hilite)
+    );
+}
+
+.card-radio.radio-instr {
+  cursor: pointer;
+}
+
+
+/* CARD CONTENT - CARD COVER */
+.table-card-content .card-cover {
+  --bg: "";
+  --lazybg: #AAAAAA;
+  --border: 4px;
+
+  width: 100%;
+  min-height: var(--games-entry-height);
+  
+  /* if we're lazy-loading the background image, display the
+  specified background color until the image is fully loaded */
+  background-image: var(--bg);
+  background-color: var(--lazybg);
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+  transition: background-size 0.1s linear;
+
+  box-sizing: border-box;
+  border-radius: 10px;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  /* disable selecting of text (as it should be considered aesthetic) */
+  user-select: none;
+
+  /* create local stacking context (with position property) to
+  display text and transparent cover properly*/
+  position: relative;
+  left: 0px;
+  top: 0px;
+  z-index: 0;
+}
+
+.table-card-content .card-cover::after {
+  /* display a fade over the background of the card to allow name,
+  platform and barcode to be more easily visible */
+
+  --borderx2: calc(var(--border) * 2);
+
+  content: "";
+
+  width: calc(100% - var(--borderx2));
+  height: calc(100% - var(--borderx2));
+
+  position: absolute;
+  top: var(--border);
+  left: var(--border);
+
+  box-sizing: border-box;
+  background-color: var(--theme-games-coverbg);
+  border-radius: 6px;
+
+  z-index: -1;
+}
+
+.card-radio:hover ~ .card-cover,
+.card-radio:active ~ .card-cover,
+.card-radio:focus-within ~ .card-cover {
+  /* slightly zoom the background when the card's radio button
+  is hovered */
+  background-size: 120%;
+  transition: background-size 0.4s ease;
+}
+
+.card-radio:checked ~ .card-cover {
+  /* if the card's radio button is selected then hide the cover */
+  display: none;
+}
+
+.card-cover > .cover-content > div:nth-child(1) {
+  /* the first child is the game's name */
+
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+  
+  font-size: var(--games-entry-name);
+  letter-spacing: 2px;
+}
+
+.card-cover > .cover-content  > div:nth-child(2) {
+  /* the second child is the game's platform */
+
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+  
+  font-size: var(--games-entry-platform);
+  line-height: 160%;
+
+  color: var(--theme-games-offcolor);
+}
+
+.table-card-content .card-cover.lazy_ {
+  /* don't load images before they are in view to save bandwidth -
+  underscore means lazy-loading is fully disabled when javascript
+  is also disabled */
+  background-image: none;
+}
+
+/* CARD COVER - HR */
+.table-card-content .card-cover hr {
+  font-size: 1.2rem;
+  line-height: 0;
+
+  border: 0px;
+
+  /* we want to only display the rule if we are displaying the
+  full 'card', not the 'record' */
+  display: var(--games-hr-disp);
+}
+
+.table-card-content .card-cover hr::after {
+  /* default content of rule is overwritten by script with a
+  barcode approximation of the game title of the card */
+  content: attr(data-barcode);
+
+  color: var(--theme-games-offcolor);
+}
+
+/* CARD COVER - FLIP ANIMATION */
+.card-cover .flip {
+  /* little animation that plays on hover at the bottom
+  right of the card (card corner turns up) - the animation
+  is entirely composed of css property transitions */
+
+  --anim-speed: 0.1s;
+
+  width: 40px;
+  height: 40px;
+
+  position: absolute;
+  bottom: calc(var(--border) * -1);
+  right: calc(var(--border) * -1);
+
+  z-index: 0;
+
+  pointer-events: none;
+}
+
+.card-cover .flip::before {
+  /* bottom-right of the animation - essentially the
+  underneath that is revealed when corner is lifted */
+
+  content: "";
+
+  width: 0%;
+  height: 0%;
+
+  background-image:
+    linear-gradient(
+      135deg,
+      transparent 49%,
+      var(--theme-games-flip-back) 50%
+    );
+  
+  border-radius: 0px 0px 6px 0px;
+
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+
+  transition:
+    width 0.05s linear,
+    height 0.05s linear;
+  
+  z-index: 2;
+}
+
+.card-cover .flip::after {
+  /* topleft of the animation - think of it as the under-
+  side of the cover */
+
+  content: "";
+
+  width: 0%;
+  height: 0%;
+  
+  background-image:
+    linear-gradient(
+      135deg,
+      var(--theme-games-infobg) 19%,
+      var(--theme-games-infobg) 49%,
+      transparent 50%
+    );
+  
+  border-radius: 10px 0px 0px 0px;
+
+  position: absolute;
+  bottom: 0%;
+  right: 0%;
+
+  transition:
+    width 0.05s linear,
+    height 0.05s linear,
+    bottom 0.05s linear,
+    right 0.05s linear;
+
+  z-index: 1;
+}
+
+.card-radio:hover ~ .card-cover .flip::before,
+.card-radio:active ~ .card-cover .flip::before,
+.card-radio:focus-within ~ .card-cover .flip::before {
+  /* begin animation when the card's radio button is hovered */
+
+  width: 100%;
+  height: 100%;
+
+  transition:
+    width var(--anim-speed) linear,
+    height var(--anim-speed) linear;
+}
+
+.card-radio:hover ~ .card-cover .flip::after,
+.card-radio:active ~ .card-cover .flip::after,
+.card-radio:focus-within ~ .card-cover .flip::after {
+  /* begin animation when the card's radio button is hovered */
+
+  width: 75%;
+  height: 75%;
+
+  bottom: 10%;
+  right: 10%;
+
+  transition:
+    width var(--anim-speed) linear,
+    height var(--anim-speed) linear,
+    bottom var(--anim-speed) linear,
+    right var(--anim-speed) linear;
+}
+
+
+/* CARD CONTENT - CARD INFO */
+.table-card-content .card-info {
+  width: 100%;
+  min-height: var(--games-entry-height);
+
+  padding: 12px 12px;
+
+  text-indent: 16px;
+  hyphens: auto;
+
+  background: var(--theme-games-infobg);
+
+  box-sizing: border-box;
+  border-radius: 10px;
+  border-color: var(--theme-games-offcolor);
+  border-width: 2px 2px;
+  border-style: solid;
+
+  position: relative;
+  top: 0px;
+  left: 0px;
+
+  /* intially the info (or back-side) is hidden */
+  display: none;
+}
+
+.card-info .info-content {
+  /* place the contents of the card-info above the radio
+  button to allow interaction with the text and links
+  (but still allow the radio button highlight to be visible) */
+
+  position: relative;
+  z-index: 15;
+}
+
+.card-radio:checked ~ .card-info {
+  /* intially the info (or back-side) is hidden */
+  
+  display: block;
+}
+
+/* CARD INFO - HR */
+.table-card-content .card-info hr {
+  /* radial fade at bottom of hr */
+  width: 80%;
+  height: 12px;
+
+  margin: 8px auto 2px;
+
+  background-image:
+    radial-gradient(
+      50% 100% at top center,
+      color-mix(in oklab, var(--theme-color) 20%, transparent),
+      transparent
+    );
+  
+  border: 0px;
+
+  position: relative;
+
+  pointer-events: none;
+}
+
+.table-card-content .card-info hr::after {
+  /* bright white line at top of hr */
+
+  content: "";
+
+  width: 100%;
+  height: 2px;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      transparent 10%,
+      color-mix(in oklab, var(--theme-color) 50%, transparent),
+      transparent 90%
+    );
+  
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.table-card-content .card-info p + p {
+  margin: 12px 0px 0px 0px;
+}
+/* . --- --- --- --- --- --- . */
+/* | ...   END TABLE STYLING | */
+/* '-------------------------' */
+
+
+/* . --- --- --- --- --- --- . */
+/* | BEGIN SHELF STYLING ... | */
+/* '-------------------------' */
+/* SHELF ITEM TABBER */
+.shelf .item-tabber {
+  width: 40px;
+  height: 124px;
+
+  position: absolute;
+  z-index: -1;
+}
+
+.shelf .shelf-item {
+  --background: url("");
+  --bg: var(--background);
+  --width: 120px;
+  --height: 240px;
+
+  width: 40px;
+  height: 130px;
+
+  position: relative;
+  z-index: 3;
+}
+
+.shelf .shelf-item.lazy_ {
+  /* don't load images before they are in view to save bandwidth */
+  --bg: url("");
+}
+
+
+.shelf .shelf-item::after {
+  content: "";
+
+  display: block;
+  width: calc(var(--width) * 0.5);
+  height: calc(var(--height) * 0.5);
+
+  background-image: var(--bg);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  position: absolute;
+  right: 0px;
+
+  pointer-events: none;
+  filter: drop-shadow(8px 0px 4px #0b0b14a0);
+}
+
+.shelf .shelf-item:hover::after,
+.shelf .shelf-item:active::after,
+.shelf .shelf-item:has(.item-tabber:focus)::after {
+  content: "";
+
+  display: none;
+}
+
+
+.shelf .shelf-item::before {
+  content: "";
+
+  width: calc(var(--width) * 0.75);
+  height: calc(var(--height) * 0.75);
+  
+  background-image: var(--background);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 100%;
+
+  position: absolute;
+  left: -12px;
+  bottom: 8px;
+
+  display: none;
+
+  pointer-events: none;
+  filter: drop-shadow(8px 0px 4px #0b0b14a0);
+}
+
+.shelf .shelf-item:hover::before,
+.shelf .shelf-item:active::before,
+.shelf .shelf-item:has(.item-tabber:focus)::before {
+  /*  */
+
+  content: "";
+
+  display: block;
+}
+
+
+/* shelf... */
+/* main shelf construct--- */
+/* contains colour variables and layout attributes */
+.shelf {
+  position: relative;
+  margin: 0px;
+  padding: 12px 12px 0px 12px;
+
+  display: grid;
+  grid-template: 100% / 16px auto;
+}
+
+/* the blurred back shadow of the whole shelf */
+.shelf::before {
+  content: "";
+
+  width: 100%;
+  height: calc(100% + 36px);
+
+  position: absolute;
+  left: 0px;
+  top: 0px;
+
+  display: block;
+
+  background-image:
+  linear-gradient(
+    100deg,
+    transparent 16px,
+    var(--theme-games-shadow) 16px
+  );
+
+  filter: blur(8px);
+
+  /* glow goes at the back */
+  z-index: 0;
+}
+/* ---main shelf construct */
+
+
+/* shelf side perspectives--- */
+.shelf .shelf-left-p {
+  background-image:
+    linear-gradient(
+      90deg,
+      var(--theme-games-main-color-dark),
+      var(--theme-games-main-color)
+    );
+  
+  mask-image:
+    linear-gradient(
+      100deg,
+      transparent 15px,
+      white 16px,
+      white
+    );
+  
+  z-index: 1;
+}
+
+.shelf .shelf-right-p {
+  width: 16px;
+  height: 100%;
+  
+  position: absolute;
+  right: 0px;
+  top: 0px;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      var(--theme-games-main-color-dark),
+      var(--theme-games-main-color)
+    );
+  
+  mask-image:
+    linear-gradient(
+      104deg,
+      transparent 15px,
+      white 16px,
+      white
+    ),
+    linear-gradient(
+      white, white 118px,
+      transparent 118px, transparent 130px
+    );
+  
+  mask-composite: intersect;
+  mask-repeat: repeat-y;
+  mask-size: 16px 130px;
+  
+  z-index: 1;
+}
+/* ---shelf side perspectives */
+
+
+.shelf .shelf-body {
+  display: grid;
+  grid-template: 100% / 16px auto 16px;
+}
+
+.shelf .shelf-top, .shelf .shelf-bottom,
+.shelf .shelf-body .shelf-left,
+.shelf .shelf-body .shelf-right {
+  position: relative;
+  background-image:
+    linear-gradient(
+      90deg,
+      var(--theme-games-main-color-light) 0%,
+      var(--theme-games-main-color-light) 1px,
+
+      var(--theme-games-main-color) 2px,
+      var(--theme-games-main-color) calc(100% - 2px),
+
+      var(--theme-games-main-color-dark) calc(100% - 1px),
+      var(--theme-games-main-color-dark) 100%
+    );
+}
+
+.shelf .shelf-top {
+  height: 16px;
+  z-index: 1;
+}
+
+.shelf .shelf-bottom {
+  height: 48px;
+  z-index: 2;
+}
+
+.shelf .shelf-body .shelf-left {
+  z-index: 3;
+}
+
+.shelf .shelf-body .shelf-right {
+  z-index: 1;
+}
+
+.shelf .shelf-body .shelf-contents {
+  position: relative;
+  display: flex;
+  
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  background-image:
+    /* shelf bottom perspective */
+    repeating-linear-gradient(
+      var(--theme-games-content-color-light) 0px,
+      var(--theme-games-content-color) 2px,
+      var(--theme-games-main-color) 36px,
+      var(--theme-games-main-color-dark) 62px,
+      #0a122ca8 64px,
+      transparent 64px, transparent 130px
+    ),
+    
+    /* shelf back shadow */
+    repeating-linear-gradient(
+      #0a122cde 0px,
+      transparent 130px
+    ),
+
+    /* shelf back */
+    repeating-linear-gradient(
+      var(--theme-games-content-color-dark) 0px,
+      var(--theme-games-content-color-dark) 118px,
+      transparent 118px, transparent 130px
+    ),
+
+    /* shelf edge shadow */
+    linear-gradient(
+      90deg,
+      #33050f50 0%,
+      #33050f50 4px,
+      
+      transparent 24px,
+      transparent calc(100% - 24px),
+
+      #33050f50 calc(100% - 4px),
+      #33050f50 100%
+    ),
+
+    /* shelf */
+    linear-gradient(
+      90deg,
+      var(--theme-games-content-color) 0%,
+      var(--theme-games-content-color) 20px,
+      
+      var(--theme-games-content-color-light) 80px,
+      var(--theme-games-content-color-light) calc(100% - 120px),
+
+      var(--theme-games-content-color) calc(100% - 20px),
+      var(--theme-games-content-color) 100%
+    );
+
+    z-index: 2;
+}
+
+.shelf-base {
+  /* ~~~ */
+  --color-dark: var(--theme-games-main-color-dark);
+  --color: var(--theme-games-main-color);
+  --color-light: var(--theme-games-main-color-light);
+
+  position: relative;
+  width: 100%;
+  height: 32px;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      transparent 12px,
+      var(--color-dark) 12px, var(--color) 28px,
+      var(--color-light) 28px, var(--color-light) 29px,
+      var(--color) 30px, var(--color) 42px,
+      var(--color-dark) 43px, var(--color-dark) 44px,
+
+      transparent 44px, transparent calc(100% - 44px),
+
+      var(--color-dark) calc(100% - 44px), var(--color) calc(100% - 28px),
+      var(--color-light) calc(100% - 28px), var(--color-light) calc(100% - 27px),
+      var(--color) calc(100% - 26px), var(--color) calc(100% - 14px),
+      var(--color-dark) calc(100% - 13px), var(--color-dark) calc(100% - 12px),
+      transparent calc(100% - 12px), transparent 100%
+    )
+}
+/* . --- --- --- --- --- --- . */
+/* | ...   END SHELF STYLING | */
+/* '-------------------------' */

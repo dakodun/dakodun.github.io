@@ -1,0 +1,20 @@
+{{ $label := .Get 0 | markdownify }}
+{{ $width := .Get 1 | default "auto" }}
+{{ $height := .Get 2 | default "auto" }}
+
+<div class="thumbbar" style="--thumb-width: {{ $width }};
+--thumb-height: {{ $height }};">
+  <div class="thumbs">
+    {{ .Inner }}
+  </div>
+
+  {{ if $label }}
+    <hr />
+    
+    <div class="thumblabel">
+      <div></div>
+      <div>{{ $label }}</div>
+      <div></div>
+    </div>
+  {{ end }}
+</div>

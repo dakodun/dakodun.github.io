@@ -1,5 +1,45 @@
-{{ partial "top" . }}
+{{ define "wrapper" }}
+  <div id="wrapper" style="--base-grid: 1fr auto auto / 100%;">
+{{ end }}
 
-      {{ .Content }}
+{{ define "header" }}
+  <header class="header">
+    <!-- Container to hold and position logos -->
+    <div style="padding: 0px; margin: 0px auto;
+    max-width: 1080px; text-align: center; position: relative;">
+    
+      <div id="themeToggle" class="checkbox-sunmoon">
+        <input type="checkbox" />
+        <span><!-- I'm a switch; a direct sibling of input! --></span>
+        <div id="nojs"></div>
+      </div>
+    
+      <script>initToggle()</script>
 
-{{ partial "bottom" . }}
+      <div class="logo">
+        <div class="logo-top">
+          <picture>
+            <source srcset="/img/spacer-256x72.png"
+            media="(max-width: 450px)" />
+            <source srcset="/img/spacer-352x99.png"
+            media="(min-width: 451px) and (max-width: 700px)" />
+            <source srcset="/img/spacer-480x135.png"
+            media="(min-width: 701px)" />
+
+            <img src="" />
+          </picture>
+        </div>
+      </div>
+    </div>
+
+    {{ partial "nav" . }}
+
+    {{ .Content }}
+  </header>
+{{ end }}
+
+{{ define "content" }}
+  <div class="content">
+
+  </div>
+{{ end }}

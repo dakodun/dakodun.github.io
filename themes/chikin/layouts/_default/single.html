@@ -1,5 +1,13 @@
-{{ partial "top" . }}
+{{ define "wrapper" }}
+  <div id="wrapper">
+{{ end }}
 
-      {{ .Content }}
+{{ define "header" }}
+  {{ partial "header-small" . }}
+{{ end }}
 
-{{ partial "bottom" . }}
+{{ define "content" }}
+  <div class="content">
+    {{ .Content }}
+  </div>
+{{ end }}

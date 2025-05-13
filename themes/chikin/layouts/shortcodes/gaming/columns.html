@@ -1,0 +1,17 @@
+<!-- -->
+{{ $left := .Get 0 | markdownify }}
+{{ $right := .Get 1 | markdownify }}
+
+<div class="gamingbottom">
+  <div class="textcolumn">
+    {{ $left }}
+  </div>
+
+  <div class="textcolumn">
+    <div class="arrow">
+      <!-- -->
+    </div>
+
+    {{ $right }}
+  </div>
+</div>

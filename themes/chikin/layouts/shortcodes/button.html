@@ -1,6 +1,7 @@
 <!-- a nice shiny button -->
 
 {{ $url := .Get "url" | default "" }}
+{{ $target := .Get "target" | default "_blank" }}
 
 {{ $bgcolor := .Get "bgcolor" | default "#393939" }}
 {{ $color := .Get "color" | default "#EEDDCC" }}
@@ -9,10 +10,9 @@
 {{ $width := .Get "width" | default "auto" }}
 {{ $height := .Get "height" | default "auto" }}
 
-<a href="{{ $url | safeURL }}" draggable="false">
-  <button class="button-glow" style="--bgcolor: {{ $bgcolor }};
+<a href="{{ $url | safeURL }}" target={{ $target }}
+  class="button-glow" style="--bgcolor: {{ $bgcolor }};
   --color: {{ $color }}; --glowcolors: {{ $glowcolors }};
   --width: {{ $width }}; --height: {{ $height }};">
-    <span>{{ .Inner }}</span>
-  </button>
+  <div>{{ .Inner }}</div>
 </a>

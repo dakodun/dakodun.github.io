@@ -1,0 +1,24 @@
+<header class="header" style="--max: 800px;">
+  <!-- Container to hold and position logo -->
+  <div style="padding: 0px; margin: 0px auto;
+  max-width: 1080px; text-align: center; position: relative;">
+    <!-- Checkbox with a pre-set size -->
+    <div id="themeToggle" class="checkbox-sunmoon" style="--size: 48px;">
+      <input type="checkbox" />
+      <span><!-- I'm a switch; a direct sibling of input! --></span>
+      <div id="nojs"></div>
+    </div>
+  
+    <script>initToggle()</script>
+
+    <!-- Logo with a pre-set size -->
+    <div class="logo"
+    style="margin: 32px 0px 0px;">
+      <div class="logo-top">
+        <img src="/img/spacer-256x72.png" />
+      </div>
+    </div>
+
+    {{ partial "nav" . }}
+  </div>
+</header>

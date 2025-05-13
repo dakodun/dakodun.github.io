@@ -1,0 +1,109 @@
+<!-- relative paths of resource folders  -->
+{{ $contentloc := "items/" }}
+{{ $iconsloc   := "items/icons/" }}
+{{ $photosloc  := "items/photos/" }}
+{{ $thumbsloc  := "items/photos/thumbs/" }}
+
+<!-- get a list of all content files in items folder  -->
+{{ $md_ := printf "%s" "*-cnt.md" |
+           printf "%s%s" $contentloc |
+           printf "%s" }}
+{{ $md  := $.Page.Resources.Match $md_ }}
+
+<div class="top-info">
+  <div>
+    This is a list of all the consoles I own that I've either restored or
+    modified. You can click 'expand' to view information on their history,
+    my history with them and any mods including the details and reasoning
+    behind them. There are also glamour shots of each including both external
+    and internal snaps where applicable.
+  </div>
+
+  <hr />
+</div>
+
+<div class="consoles">
+  <div class="consoles-list">
+    <!-- render all content files as a console-item -->
+    {{ range $md }}
+      <!-- icon animation from content frontmatter, if any -->
+      {{ $anim  := .Params.animation | default "none" }}
+
+      <!-- get the icon matching content name from resources -->
+      {{ $icon_ := printf "%s" "-icon.svg" |
+                    printf "%s%s" .Params.name |
+                    printf "%s%s" $iconsloc |
+                    printf "%s" }}
+      {{ $icon  := $.Page.Resources.GetMatch $icon_ }}
+      
+      <div class="list-item">
+        <!-- icon on left - visible in wide displays -->
+        <div class="item-icon">
+          <div class="icon-box-top"></div>
+
+          <div class="icon-image">
+            {{ if $icon }}
+              <div style="--bgimg: url('{{ $icon.RelPermalink }}');
+              --anim: {{ $anim }};">
+                <!-- icon as background image -->
+              </div>
+            {{ end }}
+          </div>
+          
+          <div class="icon-box-bottom"></div>
+        </div>
+
+        <!-- main content (right-side on wide displays) -->
+        <div class="item-content">
+          <!-- content expand/collapse -->
+          <div class="content-expand">
+            <input type="checkbox" id="{{ .Params.name }}"
+            class="expand-checkbox" />
+
+            <label for="{{ .Params.name }}" class="expand-label">
+              <!-- use content name (front matter) to match
+              checkbox and label  -->
+            </label>
+          </div>
+
+          <!-- top header -->
+          <div class="content-header">
+            {{ upper .Params.name }}
+          </div>
+
+          <!-- main content (collapsed by default) -->
+          <div class="content-detail">
+            {{ .Content }}
+
+            <div class="detail-thumbbar">
+              <!-- get a list of all photos and matching thumbnails -->
+              {{ range .Params.images }}
+                {{ $photo_ := printf "%s" ".jpg" |
+                    printf "%s%s" . |
+                    printf "%s%s" $photosloc |
+                    printf "%s" }}
+                {{ $photo  := $.Page.Resources.GetMatch $photo_ }}
+
+                {{ if $photo }}
+                  {{ $thumb_ := printf "%s" "-thumb.png" |
+                    printf "%s%s" . |
+                    printf "%s%s" $thumbsloc |
+                    printf "%s" }}
+                  {{ $thumb  := $.Page.Resources.GetMatch $thumb_ }}
+
+                  {{ if $thumb }}
+                    <a href="{{ $photo.RelPermalink }}" target="_blank"
+                    class="thumbbar-thumb lazy"
+                    style="--src: url('{{ $thumb.RelPermalink }}')">
+                      <!-- thumbnail -->
+                    </a>
+                  {{ end }}
+                {{ end }}
+              {{ end }}
+            </div>
+          </div>
+        </div>
+      </div>
+    {{ end }}
+  </div>
+</div>

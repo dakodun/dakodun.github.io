@@ -1,0 +1,14 @@
+{{ $src := .Get 0 | default "" }}
+{{ $alt := .Get 1 | default "" }}
+
+
+<!-- get resource (src) from page bundle if it exists, otherwise
+treat resource as a link -->
+{{ $res := $.Page.Resources.GetMatch $src }}
+{{ if $res }}
+  {{ $src = $res.RelPermalink }}
+{{ end }}
+
+<a class="thumb lazy" href="{{ $src }}"
+style="--bg: url('{{ $src }}');"
+alt="{{ $alt }}"></a>

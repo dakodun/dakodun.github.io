@@ -1,0 +1,323 @@
+<!-- relative paths of resource folders  -->
+{{ $contentloc := "conq/" }}
+{{ $screensloc := "conq/screens/" }}
+{{ $cardbgsloc  := "conq/bg/" }}
+
+<!-- get a list of all content files in conq folder  -->
+{{ $md_ := printf "%s" "*-cnt.md" |
+           printf "%s%s" $contentloc |
+           printf "%s" }}
+{{ $md  := $.Page.Resources.Match $md_ }}
+
+<div class="top-info">
+  <div>
+    This is a table of all the games I've beat (since records began).
+    The controls allow sorting and filtering by name and platform,
+    and you can change the cards display style to be more compact.
+  </div>
+
+  <div>
+    Clicking on a card will flip it, and on the back there <em>might</em>
+    be more information or thoughts regarding the game, and maybe some
+    screenshots. You can flip it back by clicking another card including
+    the instructions card which is always displayed.
+  </div>
+</div>
+
+<form class="controls controls-nojs" id="games-table-controls">
+  <fieldset>
+    <legend>
+      Controls
+    </legend>
+
+    <div class="controls-group" style="--grid-area: a;">
+      <div class="group-heading">
+        Sort
+      </div>
+
+      <div class="group-body group-body-sort">
+        <div class="controls-div-radiobox">
+          <input type="radio" class="controls-radiobox"
+          id="added-asc" name="card-sort" value="0" checked />
+          <label for="added-asc">
+            <div>Added</div>
+            <div>(Asc)</div>
+          </label>
+        </div>
+
+        <div class="controls-div-radiobox" role="radio">
+          <input type="radio" class="controls-radiobox"
+          id="added-desc" name="card-sort" value="1" />
+          <label for="added-desc">
+            <div>Added</div>
+            <div>(Desc)</div>
+          </label>
+        </div>
+
+        <div class="controls-div-radiobox">
+          <input type="radio" class="controls-radiobox"
+          id="title-asc" name="card-sort" value="2" />
+          <label for="title-asc">
+            <div>Title</div>
+            <div>(Asc)</div>
+          </label>
+        </div>
+
+        <div class="controls-div-radiobox">
+          <input type="radio" class="controls-radiobox"
+          id="title-desc" name="card-sort" value="3" />
+          <label for="title-desc">
+            <div>Title</div>
+            <div>(Desc)</div>
+          </label>
+        </div>
+
+        <div class="controls-div-radiobox">
+          <input type="radio" class="controls-radiobox"
+          id="platform-asc" name="card-sort" value="4" />
+          <label for="platform-asc">
+            <div>Platform</div>
+            <div>(Asc)</div>
+          </label>
+        </div>
+
+        <div class="controls-div-radiobox">
+          <input type="radio" class="controls-radiobox"
+          id="platform-desc" name="card-sort" value="5" />
+          <label for="platform-desc">
+            <div>Platform</div>
+            <div>(Desc)</div>
+          </label>
+        </div>
+      </div>
+    </div>
+
+    <div class="controls-group" style="--grid-area: b;">
+      <div class="group-heading">
+        Style
+      </div>
+
+      <div class="group-body group-body-style">
+        <div class="controls-div-radio">
+          <input type="radio" class="controls-radio" id="card"
+          name="card-style"  value="-c" checked />
+          <label for="card">
+            Card
+          </label>
+        </div>
+        
+        <div class="controls-div-radio">
+          <input type="radio" class="controls-radio" id="record"
+          name="card-style" value="-r" />
+          <label for="record">
+            Record
+          </label>
+        </div>
+      </div>
+
+      <div class="group-body-footer">
+
+      </div>
+    </div>
+
+    <div class="controls-group" style="--grid-area: c;">
+      <div class="group-heading">
+        Filter
+      </div>
+
+      <div class="group-body group-body-filter">
+        <div class="controls-div-checkbox">
+          <input type="checkbox" class="controls-checkbox"
+          id="dreamcast" name="card-filter"
+          value="Dreamcast" checked />
+          <label for="dreamcast">
+            Dreamcast
+          </label>
+        </div>
+
+        <div class="controls-div-checkbox">
+          <input type="checkbox" class="controls-checkbox"
+          id="ds" name="card-filter"
+          value="DS" checked />
+          <label for="ds">
+            DS
+          </label>
+        </div>
+
+        <div class="controls-div-checkbox">
+          <input type="checkbox" class="controls-checkbox"
+          id="game-boy" name="card-filter"
+          value="Game Boy" checked />
+          <label for="game-boy">
+            Game Boy
+          </label> 
+        </div>
+
+        <div class="controls-div-checkbox">
+          <input type="checkbox" class="controls-checkbox"
+          id="gba" name="card-filter"
+          value="GBA" checked />
+          <label for="gba">
+            GBA
+          </label>
+        </div>
+
+        <div class="controls-div-checkbox">
+          <input type="checkbox" class="controls-checkbox"
+          id="master-system" name="card-filter"
+          value="Master System" checked />
+          <label for="master-system">
+            Master System
+          </label>
+        </div>
+
+        <div class="controls-div-checkbox">
+          <input type="checkbox" class="controls-checkbox"
+          id="n64" name="card-filter"
+          value="N64" checked />
+          <label for="n64">
+            N64
+          </label>
+        </div>
+
+        <div class="controls-div-checkbox">
+          <input type="checkbox" class="controls-checkbox"
+          id="ps2" name="card-filter" 
+          value="PS2" checked />
+          <label for="ps2">
+            PS2
+          </label>
+        </div>
+
+        <div class="controls-div-checkbox">
+          <input type="checkbox" class="controls-checkbox"
+          id="snes" name="card-filter"
+          value="SNES" checked />
+          <label for="snes">
+            SNES
+          </label>
+        </div>
+
+        <div class="controls-div-checkbox">
+          <input type="checkbox" class="controls-checkbox"
+          id="wii" name="card-filter" 
+          value="Wii" checked />
+          <label for="wii">
+            Wii
+          </label>
+        </div>
+      </div>
+    </div>
+  </fieldset>
+</form>
+
+
+<div class="table" id="games-table">
+  <!-- instruction card is unique - always present at the start -->
+  <div class="table-card card-instr">
+    <div class="table-card-content">
+      <input type="radio" id="instr_"
+      name="table-cards" class="card-radio radio-instr" />
+
+      <div class="card-simp">
+        Just click a card to flip it over, or click me to reset; we're
+        just a big radio group after all and I'll always be here for you.
+      </div>
+
+      <label for="instr_">Card Instructions</label>
+    </div>
+  </div>
+
+  {{ $order := 0 }}
+  {{ range $md }}
+    <div class="table-card card-cont" data-order="{{ $order }}"
+    data-name="{{ .Params.name }}"
+    data-platform="{{ .Params.platform }}">
+      <div class="table-card-content">
+        <input type="radio" id="{{ .Params.name }}"
+        name="table-cards" class="card-radio" />
+
+        <!-- get matching card background for current card
+        id if any exists -->
+        {{ $bg_ := printf "%s" "-bg.jpg" |
+            printf "%s%s" .Params.id |
+            printf "%s%s" $cardbgsloc |
+            printf "%s" }}
+        {{ $bg  := $.Page.Resources.GetMatch $bg_ }}
+        {{ $bgurl := "" }}
+
+        {{ if $bg }}
+          {{ $bgurl = $bg.RelPermalink }}
+        {{ end }}
+
+        <!-- if card has a preferred color set for
+        use before background is loaded then use it -->
+        {{ $lazycol := "#AAAAAA" }}
+        {{ if .Params.color }}
+          {{ $lazycol = .Params.color }}
+        {{ end }}
+        
+        <!-- front of the card is decorative (name/platform) -->
+        <div class="card-cover lazy" style="--bg: url('{{ $bgurl }}');
+        --lazybg: {{ $lazycol }};">
+          <div class="cover-content">
+            <div class="cover-name">
+              <p>{{ .Params.name }}</p>
+            </div>
+
+            <div class="cover-platform">
+              <p>{{ .Params.platform }}</p>
+            </div>
+
+            <!-- modified via js to create a barcode using the
+            name of the game -->
+            <hr data-name="{{ .Params.name }}"
+            data-barcode="❚❙❚❘❚❘❙❚❘❙❙❘❘❚" />
+          </div>
+
+          <div class="flip">
+            <!-- flip element animation on corner -->
+          </div>
+        </div>
+
+        <!-- back of the card contains any info and screen grabs -->
+        <div class="card-info">
+          <div class="info-content">
+            <!-- get content from game's markdown file -->
+            {{ .Content }}
+
+            <!-- stylised divider -->
+            <hr />
+
+            <!-- create links from array of screen grabs, if any -->
+            {{ $counter := 1 }}
+            {{ range .Params.screens }}
+              {{ $screen_ := printf "%s" ".jpg" |
+                  printf "%s%s" (index . 0) |
+                  printf "%s%s" $screensloc |
+                  printf "%s" }}
+              {{ $screen  := $.Page.Resources.GetMatch $screen_ }}
+
+              {{ if $screen }}
+                <p>
+                  <a href="{{ $screen.RelPermalink }}" target="_blank">
+                    {{ $counter }}. {{ (index . 1) }}
+                  </a>
+                </p>
+
+                {{ $counter = add $counter 1 }}
+              {{ end }}
+            {{ end }}
+          </div>
+        </div>
+
+        <!-- label is only functional, it is not visible on page -->
+        <label for="{{ .Params.name }}">
+          {{ .Params.name }}
+        </label>
+      </div>
+    </div>
+
+    {{ $order = add $order 1 }}
+  {{ end }}
+</div>
