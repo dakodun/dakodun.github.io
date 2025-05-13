@@ -1,0 +1,58 @@
+<!doctype html><html lang=en-GB><head><title id=title>c h i k i n . n e t</title>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel=stylesheet><link rel=stylesheet type=text/css href=/css/style.min.e6f4330a48a66d3b0ca3074d872a5ff153ed4c4b377400924f55b58d0fedeef0.css integrity="sha256-5vQzCkimbTsMowdNhypf8VPtTEs3dACST1W1jQ/t7vA="><script src=/js/themecontrol.min.c445acd49516a23b447efc0dfd9aa9a8711f9511b873550772409c6f75632287.js integrity="sha256-xEWs1JUWojtEfvwN/ZqpqHEflRG4c1UHckCcb3VjIoc="></script><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.141.0"><script>initTheme()</script></head><body><script>0</script><div id=wrapper><header class=header style=--max:800px><div style="padding:0;margin:0 auto;max-width:1080px;text-align:center;position:relative"><div id=themeToggle class=checkbox-sunmoon style=--size:48px><input type=checkbox>
+<span></span><div id=nojs></div></div><script>initToggle()</script><div class=logo style="margin:32px 0 0"><div class=logo-top><img src=/img/spacer-256x72.png></div></div><nav id=nav-small><a href=/><div>HOME</div></a><a href=/site/solastjs/><div>SOLASTJS</div></a><a href=/site/gaming/><div>GAMING</div></a><a href=/site/other/ class=nav-current><div>OTHER</div></a></nav></div></header><div class=content><div class=main style=--backing:var(--theme-main-backing)><div class=blog><div class=important style=text-align:center><a href=https://chikin.net/game-off-2012 title="Game Off 2012 Game Page">Try out the game</a> or <a href=https://github.com/dakodun/game-off-2012 title="Game Off 2012 Repository">view the repository</a>.</div><div class=thumbbar style=--thumb-width:211px;--thumb-height:158px><div class=thumbs><a class="thumb lazy" href=/site/other/projects/gameoff2012/ss1.png style="--bg:url('/site/other/projects/gameoff2012/ss1.png')" alt></a><a class="thumb lazy" href=/site/other/projects/gameoff2012/ss2.png style="--bg:url('/site/other/projects/gameoff2012/ss2.png')" alt></a><a class="thumb lazy" href=/site/other/projects/gameoff2012/ss3.png style="--bg:url('/site/other/projects/gameoff2012/ss3.png')" alt></a><a class="thumb lazy" href=/site/other/projects/gameoff2012/ss4.png style="--bg:url('/site/other/projects/gameoff2012/ss4.png')" alt></a></div></div><h2 id=introduction>Introduction</h2><p>This was my entry for Github&rsquo;s <a href=https://github.com/blog/1303-github-game-off title="GitHub Game Off Page">Game Off 2012</a>. The aim
+was to create a web-based game loosely relating to one or more
+selected Git terms. I created the game and engine from scratch
+for the event, opting to use HTML5 and Javascript as I hadn&rsquo;t yet
+had the chance to play around with Canvas. The git terms I focused
+on were &lsquo;pushing&rsquo; and pulling&rsquo;.</p><p>The game plays out like a traditional turn-based strategy would,
+except that your units are split into two specifications: expendable
+and replaceable worker units, and expensive, stationary artillery
+units. The worker units exist to scout out ahead through the
+fog-of-war — often resulting in their deaths — and to maneuver your
+artillery units into offensive positions via pushing and pulling
+them. Your artillery units are the only offence you have and once
+they are lost the game is over. To win you must reach and destroy
+the enemy base.</p><h2 id=map-generation>Map Generation</h2><p>The maps are created procedurally using a (variable) number of
+&lsquo;ants&rsquo; which &lsquo;burrow&rsquo; a path from one end to the other. The ants
+have a quota of left and right movements that they must fulfil
+before moving up one, and bounds on how far left or right they
+can move. These horizontal movements are randomised along with
+the ant&rsquo;s starting position. This method ensures that there will
+always be a path connecting the bottom of the map to the top and
+as a result all maps will be valid. In addition to this, both the
+size of the bases (the player&rsquo;s landing zone and enemies base,
+the former of which will always be smaller in comparison to the
+latter) and the size of the map is variable.</p><div class=thumbbar style=--thumb-width:183px;--thumb-height:91px><div class=thumbs><a class="thumb lazy" href=/site/other/projects/gameoff2012/ssmapgen1.png style="--bg:url('/site/other/projects/gameoff2012/ssmapgen1.png')" alt></a></div><hr><div class=thumblabel><div></div><div>The &lsquo;Ant&rsquo; wiggles left and right randomly from its
+starting position (the circle) until it reaches its wiggle quota, n, and
+then it moves up to the next row from its current position (the dotted
+line). The Ant cant move more than x spaces from its starting position
+in either direction (denoted by the red half blocks) and when it reaches
+this boundary it moves in the opposite direction. The spaces visited by
+the Ant are valid terrain (green squares) and any not visited are
+impassable terrain (black squares).</div><div></div></div></div><p>Originally I planned to use a set of circles to create the map
+by placing points at distances along the map (with some random
+variance) and then expanding the radii of the circles together
+until they collide with one another. This ensures that there is
+a valid path from one end of the map to the other. However, because
+the maps have a constrained width this led to the map essentially
+being a solid block except for one or two missing tiles.</p><div class=thumbbar style=--thumb-width:211px;--thumb-height:158px><div class=thumbs><a class="thumb lazy" href=/site/other/projects/gameoff2012/ssmapgen2.png style="--bg:url('/site/other/projects/gameoff2012/ssmapgen2.png')" alt></a></div><hr><div class=thumblabel><div></div><div>Small circles that fit entirely inside one space (black
+circles) are seeded throughout the map at set distances apart (with some
+random variation) and grow their radii in turn by a size of one space (the
+dotted line) until they collide with each other. Every circle must collide
+with at least 2 others or with a map boundary (top or bottom). Any spaces
+inside the resulting circles (red circles) are considered valid terrain
+(green squares) and any outwith are impassable (black squares).</div><div></div></div></div><h2 id=conclusion>Conclusion</h2><p>Due to time constraints (a lot of the time was spent working on
+the actual engine) there are a lot of planned features that didn&rsquo;t
+make it in. Things such as mobile enemy offensive units that patrol
+or seek you out, enemy camps — essentially smaller versions of the
+enemy base — which act as blockades to be avoided or destroyed, a
+variety of player units to control, and some sort of resource or base
+management. On the engine side of things I would have liked to have
+audio support (both music and sound effects).</p></div></div></div><footer class=footer><div id=footer-large>Site and content created by Iain Crawford
+(<a href=https://github.com/dakodun target=_blank>dakodun</a>).<br>Generated by
+<a href=https://gohugo.io/ target=_blank>Hugo</a>.
+Deployed using
+<a href=https://github.com/features/actions target=_blank>GitHub Actions</a>.</div><div id=footer-small>By Iain Crawford
+(<a href=https://github.com/dakodun target=_blank>dakodun</a>)<br>w/ <a href=https://gohugo.io/ target=_blank>Hugo</a> &
+    <a href=https://github.com/features/actions target=_blank>GitHub Actions</a>.</div></footer></div></body></html>

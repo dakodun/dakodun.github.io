@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="120"
+   height="120"
+   viewBox="0 0 31.750001 31.750001"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2">
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3134">
+      <path
+         id="path3136"
+         style="fill:#00ff00;fill-opacity:0.298805;stroke-width:0.529164;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke;stop-color:#000000"
+         d="m 80.596047,133.68958 3.863002,-0.10053 c 1.438558,-1.10888 1.975477,-0.47083 2.61271,-0.0271 l 30.974721,-0.19854 c 0.23636,0.0806 0.43495,0.24936 0.81907,-0.0148 l 1.77278,-0.0711 c 0.99078,0.014 1.50557,0.60446 1.50408,1.58211 l -0.0276,2.02951 c -0.34994,0.43622 -0.15324,0.70845 -1.2e-4,0.99375 l -0.55349,59.00672 c -1.37507,8.98961 -9.25908,9.49643 -14.58738,9.49643 l -27.133888,0.28433 c -1.135542,0 -1.906331,-0.57281 -1.906331,-1.54278 l -1.357717,-67.03124 c 0.301151,-0.32038 0.252571,-0.60896 -0.01778,-0.87738 l -0.03831,-1.89123 c 0,-0.62695 0.416655,-1.65767 1.374407,-1.65767 l 1.866812,-0.0203 c 0.221637,0.21172 0.509546,0.19149 0.835023,0.0398 z" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath3134-9">
+      <path
+         id="path3136-8"
+         style="fill:#00ff00;fill-opacity:0.298805;stroke-width:0.529164;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke;stop-color:#000000"
+         d="m 80.596047,133.68958 3.863002,-0.10053 c 1.438558,-1.10888 1.975477,-0.47083 2.61271,-0.0271 l 30.974721,-0.19854 c 0.23636,0.0806 0.43495,0.24936 0.81907,-0.0148 l 1.77278,-0.0711 c 0.99078,0.014 1.50557,0.60446 1.50408,1.58211 l -0.0276,2.02951 c -0.34994,0.43622 -0.15324,0.70845 -1.2e-4,0.99375 l -0.55349,59.00672 c -1.37507,8.98961 -9.25908,9.49643 -14.58738,9.49643 l -27.133888,0.28433 c -1.135542,0 -1.906331,-0.57281 -1.906331,-1.54278 l -1.357717,-67.03124 c 0.301151,-0.32038 0.252571,-0.60896 -0.01778,-0.87738 l -0.03831,-1.89123 c 0,-0.62695 0.416655,-1.65767 1.374407,-1.65767 l 1.866812,-0.0203 c 0.221637,0.21172 0.509546,0.19149 0.835023,0.0398 z" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath13613">
+      <path
+         id="path13615"
+         style="fill:#00ff00;fill-opacity:0.298805;stroke-width:0.529164;stroke-linecap:round;stroke-linejoin:round;paint-order:fill markers stroke;stop-color:#000000"
+         d="m 75.444216,168.71316 c -0.273508,-0.0143 -0.391203,0.20955 -0.427615,0.34544 l -15.953936,0.0294 c -0.0024,-0.22272 0.04554,-0.37924 -0.235206,-0.42431 l -2.020912,0.0725 c -0.581059,7e-5 -1.610833,0.41895 -1.621342,1.21388 l -0.172694,11.55684 c -0.442071,0.61452 -0.151392,1.13743 -0.04191,1.683 l -0.53014,21.29043 c 0.732433,4.98882 4.68902,4.99962 7.813267,5.04097 l 16.29378,0.11967 c 0.665824,0.008 1.122482,-0.30242 1.130448,-0.83956 l -0.58367,-38.77932 c 0,-0.4438 -0.588952,-1.18141 -1.288794,-1.19067 z" />
+    </clipPath>
+    <filter
+       style="color-interpolation-filters:sRGB"
+       id="filter15836"
+       x="0"
+       y="0"
+       width="1"
+       height="1">
+      <feColorMatrix
+         in="SourceGraphic"
+         type="hueRotate"
+         values="315"
+         result="colormatrix1"
+         id="feColorMatrix15822" />
+      <feColorMatrix
+         type="matrix"
+         values="0.5 0 0.5 0 0 0 1 0 0 0 0.5 0 0.5 0 0 0 0 0 1 0 "
+         result="colormatrix2"
+         id="feColorMatrix15824" />
+      <feColorMatrix
+         type="hueRotate"
+         values="267"
+         result="colormatrix3"
+         id="feColorMatrix15826" />
+      <feBlend
+         in2="colormatrix3"
+         mode="normal"
+         result="blend1"
+         id="feBlend15828" />
+      <feColorMatrix
+         type="matrix"
+         values="2.5 -0.75 -0.75 0 0 -0.75 2.5 -0.75 0 0 -0.75 -0.75 2.5 0 0 0 0 0 1 0 "
+         result="colormatrix4"
+         id="feColorMatrix15830" />
+      <feComposite
+         in="colormatrix4"
+         in2="blend1"
+         operator="arithmetic"
+         k2="0.907186"
+         result="composite1"
+         id="feComposite15832"
+         k1="0"
+         k3="0"
+         k4="0" />
+      <feBlend
+         in2="blend1"
+         mode="normal"
+         result="blend2"
+         id="feBlend15834" />
+    </filter>
+  </defs>
+  <g
+     id="layer1"
+     transform="matrix(1.5367812,0,0,1.3496357,-400.40917,-136.67497)"
+     style="stroke-width:0.694363">
+    <path
+       style="fill:#ff0000;fill-opacity:1;stroke-width:0.694363"
+       d="m 267.32148,124.37032 c -2.51531,-5.054 -5.60762,-7.21064 -6.67237,-8.09012 -0.63483,-0.63588 1.95021,-2.41543 3.36385,-2.12849 1.43558,0.68199 2.78628,1.879 4.12671,4.23467 2.27005,-7.40147 5.21392,-11.90229 8.70619,-16.10044 1.27965,-1.17102 3.62606,-1.18356 4.05604,-0.7737 0.20175,0.19231 0.6424,0.69289 -0.13139,1.54858 -3.57592,3.95442 -7.80205,11.07868 -11.05216,21.26861 -0.19442,0.60956 -2.08355,0.61236 -2.39687,0.0409 z"
+       id="path1726" />
+  </g>
+</svg>

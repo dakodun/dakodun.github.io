@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   id="Layer_1"
+   data-name="Layer 1"
+   viewBox="0 0 751.76001 129.72"
+   version="1.1"
+   width="751.76001"
+   height="129.72"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs35">
+    <style
+       id="style2">
+      .cls-1, .cls-2, .cls-3, .cls-4 {
+        fill-rule: evenodd;
+      }
+
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-3);
+      }
+    </style>
+    <linearGradient
+       id="linear-gradient"
+       x1="116.84"
+       y1="129.72"
+       x2="116.84"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#23bcee"
+         id="stop4" />
+      <stop
+         offset="0.07"
+         stop-color="#24b0e5"
+         id="stop6" />
+      <stop
+         offset="0.36"
+         stop-color="#2785c3"
+         id="stop8" />
+      <stop
+         offset="0.63"
+         stop-color="#2965aa"
+         id="stop10" />
+      <stop
+         offset="0.85"
+         stop-color="#2b529b"
+         id="stop12" />
+      <stop
+         offset="1"
+         stop-color="#2b4b96"
+         id="stop14" />
+    </linearGradient>
+    <linearGradient
+       id="linear-gradient-2"
+       x1="634.51001"
+       y1="125.33"
+       x2="634.51001"
+       y2="3.46"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#09b2cf"
+         id="stop17" />
+      <stop
+         offset="1"
+         stop-color="#304e97"
+         id="stop19" />
+    </linearGradient>
+    <linearGradient
+       id="linear-gradient-3"
+       x1="358"
+       y1="129.72"
+       x2="358"
+       gradientUnits="userSpaceOnUse">
+      <stop
+         offset="0"
+         stop-color="#09b2cf"
+         id="stop22" />
+      <stop
+         offset="0.2"
+         stop-color="#178fbb"
+         id="stop24" />
+      <stop
+         offset="0.4"
+         stop-color="#2273ab"
+         id="stop26" />
+      <stop
+         offset="0.6"
+         stop-color="#2a5ea0"
+         id="stop28" />
+      <stop
+         offset="0.8"
+         stop-color="#2e5299"
+         id="stop30" />
+      <stop
+         offset="1"
+         stop-color="#304e97"
+         id="stop32" />
+    </linearGradient>
+  </defs>
+  <title
+     id="title37">PlayStation 2 logo</title>
+  <g
+     id="g3">
+    <polygon
+       id="polygon5"
+       class="cls-1"
+       points="225.36,9.15 225.36,59.87 0,59.87 0,129.72 9.14,129.72 9.14,69.02 233.68,69.02 233.68,0 0,0 0,9.15 "
+       style="fill:url(#linear-gradient)" />
+    <polygon
+       id="polygon7"
+       class="cls-2"
+       points="742.62,9.15 742.62,59.87 517.25,59.87 517.25,129.72 751.76,129.72 751.76,120.58 527.24,120.58 527.24,69.02 751.76,69.02 751.76,0 517.25,0 517.25,9.15 "
+       style="fill:url(#linear-gradient-2)" />
+    <polygon
+       id="polygon9"
+       class="cls-3"
+       points="233.68,120.58 233.68,129.72 363.41,129.72 363.41,9.15 482.32,9.15 482.32,0 353.43,0 353.43,120.58 "
+       style="fill:url(#linear-gradient-3)" />
+  </g>
+</svg>
