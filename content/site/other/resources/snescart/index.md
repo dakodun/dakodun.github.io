@@ -16,10 +16,10 @@ page (carts, cds and the like)"""
 {{< blog/blog >}}
 
 {{% blog/markdown %}}
-  I made these models in Blender for the shelf on the [games] page to when
+  I made these models in Blender for the shelf on the [games] page when
   I couldn't find any readily available. They allow me to quickly render
   carts and cds of various games (at the correct perspective) by simply
-  changing a texture.
+  changing a texture; feel free to use them as you please.
 
   [games]: {{% ref "site/gaming/games/" %}} (chikin.net - games)
 {{% /blog/markdown %}}
