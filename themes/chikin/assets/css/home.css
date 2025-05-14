@@ -147,7 +147,7 @@
 .homebox > div:nth-child(4) {
   width: 100%;
 
-  text-align: justify;
+  text-align: left;
   hyphens: auto;
 
   grid-area: d;

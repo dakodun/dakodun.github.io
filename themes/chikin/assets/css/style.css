@@ -1129,7 +1129,7 @@ resource */
 
 	font-size: 0.875rem;
   font-weight: normal;
-  text-align: justify;
+  text-align: left;
 
   display: grid;
   grid-template: auto/ 0.5fr auto 0.5fr;
@@ -1207,7 +1207,7 @@ ensuring no formatting - optional label */
 
 	font-size: 0.875rem;
   font-weight: normal;
-  text-align: justify;
+  text-align: left;
 
   display: grid;
   grid-template: auto/ 0.5fr auto 0.5fr;
