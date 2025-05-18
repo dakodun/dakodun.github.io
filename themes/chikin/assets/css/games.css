@@ -13,7 +13,7 @@
   --games-entry-height-c: 120px;
   --games-entry-name-c: 1.6rem;
   --games-entry-platform-c: 1.2rem;
-  --games-hr-disp-c: initial;
+  --games-hr-disp-c: flex;
   --games-simp-text-c: 1.0rem;
 
   --games-entry-height-r: 48px;
@@ -880,6 +880,8 @@ whitespace (flex display of parent replaces this behaviour) */
   width: calc(100% - var(--borderx2));
   height: calc(100% - var(--borderx2));
 
+  margin: 0px;
+
   position: absolute;
   top: var(--border);
   left: var(--border);
@@ -905,12 +907,22 @@ whitespace (flex display of parent replaces this behaviour) */
   display: none;
 }
 
+.card-cover > .cover-content {
+  /* add a little padding for the longer game names */
+  padding: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px 0px;
+}
+
 .card-cover > .cover-content > div:nth-child(1) {
   /* the first child is the game's name */
 
   font-family: "Lato", sans-serif;
   font-weight: 700;
   font-style: normal;
+  line-height: 100%;
   
   font-size: var(--games-entry-name);
   letter-spacing: 2px;
@@ -922,10 +934,12 @@ whitespace (flex display of parent replaces this behaviour) */
   font-family: "Lato", sans-serif;
   font-weight: 400;
   font-style: italic;
+  line-height: 100%;
+
+  margin: 2px 0px 4px;
   
   font-size: var(--games-entry-platform);
-  line-height: 160%;
-
+  
   color: var(--theme-games-offcolor);
 }
 
@@ -936,24 +950,54 @@ whitespace (flex display of parent replaces this behaviour) */
   background-image: none;
 }
 
-/* CARD COVER - HR */
-.table-card-content .card-cover hr {
-  font-size: 1.2rem;
-  line-height: 0;
-
-  border: 0px;
+/* CARD COVER - BARCODE */
+.card-cover .cover-barcode {
+  /* using unicode vertical bars works great at mimicking a barcode,
+  but on certain platforms (specifically debian) they are treated as
+  monospaced characters and so look weird (extra spacing between) -
+  using spans allows us to control the spacing and dimensions */
 
   /* we want to only display the rule if we are displaying the
-  full 'card', not the 'record' */
+  full 'card', not the 'record' - display as a flex to allow
+  consistent gaps between the blocks */
   display: var(--games-hr-disp);
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3px 3px;
 }
 
-.table-card-content .card-cover hr::after {
-  /* default content of rule is overwritten by script with a
-  barcode approximation of the game title of the card */
-  content: attr(data-barcode);
+.cover-barcode .barcode-l,
+.cover-barcode .barcode-m,
+.cover-barcode .barcode-s {
+  height: 14px;
 
-  color: var(--theme-games-offcolor);
+  background-color: var(--theme-games-offcolor);
+
+  display: inline-block;
+}
+
+.cover-barcode .barcode-l {
+  width: 6px;
+}
+
+.cover-barcode .barcode-m {
+  width: 3px;
+}
+
+.cover-barcode .barcode-s {
+  width: 1px;
+}
+
+.cover-barcode .barcode-dot {
+  width: 4px;
+  height: 4px;
+
+  background-color: var(--theme-games-offcolor);
+
+  border-radius: 51%;
+
+  display: inline-block;
 }
 
 /* CARD COVER - FLIP ANIMATION */

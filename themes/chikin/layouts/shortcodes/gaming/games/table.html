@@ -269,10 +269,25 @@
               <p>{{ .Params.platform }}</p>
             </div>
 
-            <!-- modified via js to create a barcode using the
-            name of the game -->
-            <hr data-name="{{ .Params.name }}"
-            data-barcode="❚❙❚❘❚❘❙❚❘❙❙❘❘❚" />
+            <!-- use spans instead of unicode characters to ensure a
+            consistent size across platforms -->
+            <div class="cover-barcode "data-name="{{ .Params.name }}">
+              <!-- default barcode if script doesn't run -->
+              <span class="barcode-l"></span>
+              <span class="barcode-m"></span>
+              <span class="barcode-l"></span>
+              <span class="barcode-s"></span>
+              <span class="barcode-l"></span>
+              <span class="barcode-s"></span>
+              <span class="barcode-m"></span>
+              <span class="barcode-l"></span>
+              <span class="barcode-s"></span>
+              <span class="barcode-m"></span>
+              <span class="barcode-m"></span>
+              <span class="barcode-s"></span>
+              <span class="barcode-s"></span>
+              <span class="barcode-l"></span>
+            </div>
           </div>
 
           <div class="flip">

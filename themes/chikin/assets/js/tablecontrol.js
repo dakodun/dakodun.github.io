@@ -60,11 +60,11 @@ function getCards() {
 
 function barcodifyCard(cardElem) {
   // step through the card element contnent to find the
-  // horizontal rule element buried in its hierarchy and 
+  // barcode element buried in its hierarchy and 
   // change it to be a customised barcode based on the
   // game's name
 
-  let elemHR = null;
+  let elemBarcode = null;
 
   if (cardElem) {
     let elemIter = cardElem.firstElementChild;
@@ -78,59 +78,56 @@ function barcodifyCard(cardElem) {
         } else if (child.className.includes("cover-content")) {
           elemIter = child;
           i = -1;
-        } else if (child.nodeName === "HR") {
-          elemHR = child;
+        } else if (child.className.includes("cover-barcode")) {
+          elemBarcode = child;
           break;
         }
       }
     }
   }
 
-  // if we found a horizontal rule inside the card cover
+  // if we found a barcode element inside the card cover
   // then change the content to be our customised barcode
-  if (elemHR) {
+  if (elemBarcode) {
     // map letters to values depending on how often they
     // appear in writings, numbers are divided by 3
     let letterValue = new Map([
-      ["z", 0], ["q", 0], ["j", 0], ["x", 0], ["k", 0],
-      ["v", 0], ["b", 0], ["p", 0],
+      ["z", "s"], ["q", "s"], ["j", "s"], ["x", "s"], ["k", "s"],
+      ["v", "s"], ["b", "s"], ["p", "s"],
 
-      ["g", 1], ["y", 1], ["f", 1], ["m", 1], ["w", 1],
-      ["c", 1], ["u", 1], ["l", 1], ["d", 1],
+      ["g", "m"], ["y", "m"], ["f", "m"], ["m", "m"], ["w", "m"],
+      ["c", "m"], ["u", "m"], ["l", "m"], ["d", "m"],
 
-      ["r", 2], ["h", 2], ["s", 2], ["n", 2], ["i", 2],
-      ["o", 2], ["a", 2], ["t", 2], ["e", 2],
+      ["r", "l"], ["h", "l"], ["s", "l"], ["n", "l"], ["i", "l"],
+      ["o", "l"], ["a", "l"], ["t", "l"], ["e", "l"],
 
-      ["0", 0], ["3", 0], ["6", 0], ["9", 0],
-      ["1", 1], ["4", 1], ["7", 1],
-      ["2", 2], ["5", 2], ["8", 2]
+      ["0", "s"], ["3", "s"], ["6", "s"], ["9", "s"],
+      ["1", "m"], ["4", "m"], ["7", "m"],
+      ["2", "l"], ["5", "l"], ["8", "l"]
     ]);
 
-    // each value is then assigned a thickness of bar
-    let valueBar = new Map([
-      [0, "❘"], [1, "❙"], [2, "❚"]
-    ]);
+    // clear default barcode from element
+    while (elemBarcode.firstChild) {
+      elemBarcode.removeChild(elemBarcode.firstChild);
+    }
 
     // convert every character into a bar, special characters
     // are middle thickness and spaces are a dot
-    let output = "";
-    let input = elemHR.dataset.name.toLowerCase();
+    let input = elemBarcode.dataset.name.toLowerCase();
     for (let char of input) {
-      let val = letterValue.get(char);
-      let bar = valueBar.get(val);
+      const span = document.createElement("span");
+      let wid = letterValue.get(char);
 
-      if (bar) {
-        output += bar;
+      if (wid) {
+        span.classList.add("barcode-" + wid);
       } else if (char === " ") {
-        output += "‧";
+        span.classList.add("barcode-dot");
       } else {
-        output += valueBar.get(1);
+        span.classList.add("barcode-m");
       }
-    }
 
-    // updating the custom dataset attribute updates
-    // the content property in the css pseudo-element
-    elemHR.dataset.barcode = output;
+      elemBarcode.appendChild(span);
+    }
   }
 }
 
