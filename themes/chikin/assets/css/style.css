@@ -1054,7 +1054,8 @@ resource */
 }
 
 .blog .thumbbar .thumbs .thumb {
-  --bg: url('');
+  --lazybg: url('');
+  --lazycol: #AAAAAA;
 
   /* the thumbnail should be the specified size, but scale down
   to fit horizontally*/
@@ -1073,7 +1074,8 @@ resource */
 
   /* the thumbnail is displayed via the background property, so fix it
   in place */
-  background-image: var(--bg);
+  background-image: var(--lazybg);
+  background-color: var(--lazycol);
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
@@ -1111,10 +1113,6 @@ resource */
   top: 0px;
   left: 0px;
   z-index: 0;
-}
-
-.blog .thumbbar .thumbs .lazy_ {
-  background-image: none;
 }
 
 .blog .thumbbar .thumbs .thumb:hover::before,

@@ -67,9 +67,9 @@
             {{ $iconURL = $icon.RelPermalink }}
           {{ end }}
 
-          <div class="shelf-item lazy" alt="{{ .Params.name }} Shelf Item"
+          <div class="shelf-item lazyload" alt="{{ .Params.name }} Shelf Item"
           title="{{ .Params.name }}"
-          style="--background: url('{{ $iconURL }}');
+          style="--lazybg: url('{{ $iconURL }}'); --lazycol: #4D5A6860;
           --width: {{ $width }}px; --height: {{ $height }}px;">
             <!--  -->
             <div class="item-tabber" tabindex="0"></div>

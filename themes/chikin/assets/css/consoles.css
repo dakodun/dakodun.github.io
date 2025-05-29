@@ -577,12 +577,14 @@
 
 /* THUMBNAIL */
 .consoles .thumbbar-thumb {
-  --src: url("");
+  --lazybg: none;
+  --lazycol: #AAAAAA;
 
   width: var(--size);
   height: var(--size);
 
-  background-image: var(--src);
+  background-image: var(--lazybg);
+  background-color: var(--lazycol);
   background-position: center 0%;
   background-repeat: no-repeat;
   background-size: 100%;
@@ -595,10 +597,6 @@
   cursor: pointer;
 
   transition: background-size 0.2s linear;
-}
-
-.consoles .thumbbar-thumb.lazy_ {
-  background-image: none;
 }
 
 .consoles .thumbbar-thumb:hover,

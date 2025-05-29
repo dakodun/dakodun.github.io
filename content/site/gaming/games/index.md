@@ -6,7 +6,6 @@ type = ""
 
 [params]
   scripts = [
-    ["js/lazyloadpre.js", ""],
     ["js/lazyload.js", "module"],
     ["js/tablecontrol.js", "module"]
   ]

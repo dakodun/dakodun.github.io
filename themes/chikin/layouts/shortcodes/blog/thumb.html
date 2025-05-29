@@ -9,6 +9,6 @@ treat resource as a link -->
   {{ $src = $res.RelPermalink }}
 {{ end }}
 
-<a class="thumb lazy" href="{{ $src }}"
-style="--bg: url('{{ $src }}');"
+<a class="thumb lazyload" href="{{ $src }}"
+style="--lazybg: url('{{ $src }}'); --lazycol: #85888B93;"
 alt="{{ $alt }}"></a>

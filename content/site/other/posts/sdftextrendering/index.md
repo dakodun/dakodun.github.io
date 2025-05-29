@@ -10,7 +10,6 @@ implementing it into my C++ framework."""
 
 [params]
   scripts = [
-    ["js/lazyloadpre.js", ""],
     ["js/lazyload.js", "module"]
   ]
 

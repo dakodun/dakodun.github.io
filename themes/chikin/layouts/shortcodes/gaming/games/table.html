@@ -258,8 +258,8 @@
         {{ end }}
         
         <!-- front of the card is decorative (name/platform) -->
-        <div class="card-cover lazy" style="--bg: url('{{ $bgurl }}');
-        --lazybg: {{ $lazycol }};">
+        <div class="card-cover lazyload"
+        style="--lazybg: url('{{ $bgurl }}'); --lazycol: {{ $lazycol }};">
           <div class="cover-content">
             <div class="cover-name">
               <p>{{ .Params.name }}</p>

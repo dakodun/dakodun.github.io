@@ -93,8 +93,9 @@
 
                   {{ if $thumb }}
                     <a href="{{ $photo.RelPermalink }}" target="_blank"
-                    class="thumbbar-thumb lazy"
-                    style="--src: url('{{ $thumb.RelPermalink }}')">
+                    class="thumbbar-thumb lazyload"
+                    style="--lazybg: url('{{ $thumb.RelPermalink }}');
+                    --lazycol: #99AAAA55;">
                       <!-- thumbnail -->
                     </a>
                   {{ end }}
