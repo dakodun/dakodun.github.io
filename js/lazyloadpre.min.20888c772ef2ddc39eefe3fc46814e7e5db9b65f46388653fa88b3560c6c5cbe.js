@@ -1,1 +1,0 @@
-function lazyLoadPreParse(){let e=[...document.styleSheets].filter(e=>new URL(e.href).origin===window.location.origin);e=e.forEach(e=>{for(let t of e.cssRules)t.selectorText&&t.selectorText.includes(".lazy_")&&(t.selectorText=t.selectorText.replace(".lazy_",".lazy"))})}lazyLoadPreParse()

@@ -1,1 +1,0 @@
-function lazyLoad(){const e=new IntersectionObserver((e,t)=>{e.forEach(e=>{if(e.isIntersecting){const n=e.target;n.classList.remove("lazy"),t.unobserve(n)}})}),t=document.querySelectorAll(".lazy");t.forEach(t=>{e.observe(t)})}lazyLoad()
