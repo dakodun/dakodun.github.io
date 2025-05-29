@@ -8,7 +8,6 @@ card game (based on 'President') played against 3 CPU opponents."""
 
 [params]
   scripts = [
-    ["js/lazyloadpre.js", ""],
     ["js/lazyload.js", "module"]
   ]
 
