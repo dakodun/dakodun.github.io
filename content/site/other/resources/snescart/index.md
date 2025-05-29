@@ -7,6 +7,11 @@ type = "resource"
 summary = """3D models I made for use on my shelf on the games
 page (carts, cds and the like)"""
 
+[params]
+  scripts = [
+    ["js/lazyload.js", "module"]
+  ]
+
 [menu.main]
   name = "OTHER-resource-snescart"
 	parent = "OTHER"

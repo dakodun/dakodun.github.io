@@ -8,6 +8,11 @@ summary = """A look at a re-imagining of an earlier project intended
 to be a turn-based strategy game; specifically at changes made to the
 map style."""
 
+[params]
+  scripts = [
+    ["js/lazyload.js", "module"]
+  ]
+
 [menu.main]
   name = "OTHER-project-staticoffensive"
 	parent = "OTHER"

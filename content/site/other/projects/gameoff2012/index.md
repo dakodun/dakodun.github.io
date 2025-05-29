@@ -7,6 +7,11 @@ type = "project"
 summary = """Looking at my entry in the GitHub Game Off — a month long
 Game Jam."""
 
+[params]
+  scripts = [
+    ["js/lazyload.js", "module"]
+  ]
+
 [menu.main]
   name = "OTHER-project-gameoff2012"
 	parent = "OTHER"
