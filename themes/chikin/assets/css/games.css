@@ -1193,6 +1193,11 @@ whitespace (flex display of parent replaces this behaviour) */
 .table-card-content .card-info p + p {
   margin: 12px 0px 0px 0px;
 }
+
+.info-content .content-links p + p {
+  /* the list of links should be more compact */
+  margin: 2px 0px 0px 0px;
+}
 /* . --- --- --- --- --- --- . */
 /* | ...   END TABLE STYLING | */
 /* '-------------------------' */

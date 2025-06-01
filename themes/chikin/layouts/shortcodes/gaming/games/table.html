@@ -305,6 +305,7 @@
             <hr />
 
             <!-- create links from array of screen grabs, if any -->
+            <div class="content-links">
             {{ $counter := 1 }}
             {{ range .Params.screens }}
               {{ $screen_ := printf "%s" ".jpg" |
@@ -323,6 +324,7 @@
                 {{ $counter = add $counter 1 }}
               {{ end }}
             {{ end }}
+            </div>
           </div>
         </div>
 

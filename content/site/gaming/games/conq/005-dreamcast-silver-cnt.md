@@ -5,9 +5,11 @@
   id = "dreamcast-silver"
 
   screens = [
-    ["silver-1", "One"],
-    ["silver-2", "Two"],
-    ["silver-3", "Three"]
+    ["silver-monastery", "Monastery (Wide Shot)"],
+    ["silver-bridge", "Bridge Transition"],
+    ["silver-office", "Side Study"],
+    ["silver-palace", "Palace Entrance"],
+    ["silver-hideout", "Cliffside Hideout"]
   ]
 
   color = "#79BFDD"
