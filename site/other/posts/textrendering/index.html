@@ -1,0 +1,78 @@
+<!doctype html><html lang=en-GB><head><title id=title>c h i k i n . n e t</title>
+<link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><link rel=preconnect href=https://fonts.googleapis.com><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel=stylesheet><link rel=stylesheet type=text/css href=/css/style.min.0d553304bd9e0629ae5a03ea95d080b25d1b1c6699768d256a9737fac01b5b67.css integrity="sha256-DVUzBL2eBimuWgPqldCAsl0bHGaZdo0lapc3+sAbW2c="><script src=/js/themecontrol.min.c445acd49516a23b447efc0dfd9aa9a8711f9511b873550772409c6f75632287.js integrity="sha256-xEWs1JUWojtEfvwN/ZqpqHEflRG4c1UHckCcb3VjIoc="></script><script src=/js/lazyload.min.3b33cd1f1b82ac42fdb7da063b12130d01afa7fee6a3fe1c63c26aaa32d0c925.js type=module integrity="sha256-OzPNHxuCrEL9t9oGOxITDQGvp/7mo/4cY8JqqjLQySU=">
+      
+      </script><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta name=generator content="Hugo 0.141.0"><script>initTheme()</script></head><body><script>0</script><div id=wrapper><header class=header style=--max:800px><div style="padding:0;margin:0 auto;max-width:1080px;text-align:center;position:relative"><div id=themeToggle class=checkbox-sunmoon style=--size:48px><input type=checkbox>
+<span></span><div id=nojs></div></div><script>initToggle()</script><div class=logo style="margin:32px 0 0"><div class=logo-top><img src=/img/spacer-256x72.png></div></div><nav id=nav-small><a href=/><div>HOME</div></a><a href=/site/solastjs/><div>SOLASTJS</div></a><a href=/site/gaming/><div>GAMING</div></a><a href=/site/other/ class=nav-current><div>OTHER</div></a></nav></div></header><div class=content><div class=main style=--backing:var(--theme-main-backing)><div class=blog><h2>Rendering Text (with as little effort as possible)</h2><h3>10 July, 2025</h3><hr><div class=embox>See the implementation in the <a href=https://github.com/dakodun/solastjs title="SolastJS - GitHub">SolastJS repository</a>, specifically
+the <a href=https://github.com/dakodun/solastjs/blob/main/scr/atlasfont.js title="SolastJS (AtlasFont) - GitHub">atlasfont.js</a> and <a href=https://github.com/dakodun/solastjs/blob/main/scr/renderstring.js title="SolastJS (RenderString) - GitHub">renderstring.js</a> files.</div><h2 id=introduction>Introduction</h2><p>I wrote a post about a technique for rendering text (<a href=https://chikin.net/site/other/posts/sdftextrendering/ title="Rendering Text: Signed Distance Fields - chikin.net">Rendering Text - SDF</a>) in
+the before-times, and while it&rsquo;s still super interesting and well worth a
+look, it&rsquo;s definitely on the more complex side. This time around I wanted
+something that was simple to understand, implement and use.</p><p>Initially I just rendered the string to a canvas with the <a href=https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API title="Canvas API - MDN">Canvas API</a> and
+used that as a texture to draw the string on the screen. It was quick and
+relatively simple to implement but lacks the flexibility I was looking
+for with regards to string styling and animation. Instead I looked for a
+way to maintain the simplicity of using the canvas&rsquo; text rendering
+capabilities but render the string using individual quads for each glyph.</p><h2 id=preparing-font>Preparing Font</h2><p>The <a href=https://developer.mozilla.org/en-US/docs/Web/API/FontFace title="FontFace - MDN">CSS Font Loading API</a> makes it easy to load a font face and
+add it to the DOM for use with a canvas.</p><div class=codebox><div class=codes><pre><code>let font = new FontFace(family, src);
+try {
+  await font.load();
+  document.fonts.add(font);
+} catch (e) {
+  console.error(e);
+}
+
+// generate font
+
+document.fonts.delete(font);
+</code></pre></div><hr><div class=codelabel><div></div><div>Loading a font with the CSS Font Loading API, to be used
+in generating our font atlas.</div><div></div></div></div><h2 id=rendering-glyphs>Rendering Glyphs</h2><p>The Canvas API allows us to create an <a href=https://developer.mozilla.org/en-US/docs/Web/API/OffscreenCanvas title="OffscreenCanvas - MDN">OffscreenCanvas</a> of our
+desired texture dimensions, and with that a <a href=https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D title="CanvasRenderingContext2 - MDN">CanvasRenderingContext2D</a>
+via the &lsquo;getContext&rsquo; method. After setting the font and fillStyle of that
+context to our previously loaded font, we can use it (&lsquo;fillText&rsquo; method)
+— and a simple packing algorithm — to render our individual glyphs;
+the canvas can then be used as an image source for a <a href=https://chikin.net/site/solastjs/ title="SolastJS - chikin.net">SolastJS</a>
+Texture.</p><p><em>In practice we have an array of canvases, and for any glyph that doesn&rsquo;t
+fit on any of the current canvases we create another. Then we create a 2D
+texture array using our canvas array.</em></p><p>For the packing algorithm I went with a really simple &lsquo;shelf-based&rsquo;
+approach:</p><ul><li><p>A shelf has a maximum height and a remaining width. Each shelf also has
+a slight tolerance that allows a glyph with a smaller height to sit on it,
+but not larger.</p></li><li><p>If a shelf exists that the current glyph fits on (in both height and
+width) then it is placed there, otherwise it is placed above the existing
+shelves on a new one. If no space exists above then a new canvas layer
+is created.</p></li></ul><div class=thumbbar style=--thumb-width:323px;--thumb-height:303px><div class=thumbs><a class="thumb lazyload" href=/site/other/posts/textrendering/atlas-texture.png style="--lazybg:url('/site/other/posts/textrendering/atlas-texture.png');--lazycol:#85888B93" alt="An example of a texture with glyphs
+    packed tightly on 'shelves'."></a></div><hr><div class=thumblabel><div></div><div>Glyphs packed (in order: &lsquo;A&rsquo;, &lsquo;a&rsquo;, &lsquo;B&rsquo;, &lsquo;b&rsquo;, etc) into texture
+using a shelf-based algorithm. &lsquo;F&rsquo; matches the bottom shelf&rsquo;s height exactly,
+but there&rsquo;s not enough width remaining so it is placed on another shelf (as it
+is within the 2px tolerance). &lsquo;g&rsquo; is taller than all existing shelves and there
+is no room for a new shelf, so a new texture layer is needed.</div><div></div></div></div><h2 id=glyph-metrics>Glyph Metrics</h2><p>Using an OffscreenCanvas we can get metrics for our glyphs. To do so
+we only need a temporary 1 by 1 canvas and the &lsquo;measureText&rsquo; method
+<em>(we could also use one of our existing render canvases)</em>. After
+ensuring the font size and family is properly set, we can measure a
+single character and use the actual left/right and actual top/bottom
+values to get the visual bounds of the glyph (and from this calculate
+the width and height); this also includes other metrics such as drop
+and advance values.</p><p>We can also use this method to get kerning data for our glyphs. Instead of
+measuring a single character we measure two characters together and
+subtract the sum of their widths from the combined width. The leftover
+is the kerning value, positive or negative.</p><p><em>A single glyph has to be kerned with itself. Adding in a second glyph
+requires kerning with itself and with the existing glyph, in both
+directions (&lsquo;AB&rsquo; and &lsquo;BA&rsquo;).</em></p><div class=codebox><div class=codes><pre><code>1 glyph  =  1 kern  =  1 (AA)
+2 glyphs = +3 kerns =  4 (BB, AB, BA)
+3 glyphs = +5 kerns =  9 (CC, AC, BC, CA, CB)
+4 glyphs = +7 kerns = 16 (DD, AD, BD, CD, DA, DB, DC)
+</code></pre></div><hr><div class=codelabel><div></div><div>Calculating our glyph kerning has a time complexity of n²
+where n is the number of glyphs.</div><div></div></div></div><h2 id=conclusion>Conclusion</h2><p>Using Canvas API offloads a lot of the busy work to its font and text
+engine. One useful artefact of this process is the ability to easily mix
+glyphs from various fonts to essentially construct a new one, though
+kerning must be carefully considered.</p><p>As for improvements, the packing algorithm is not the most efficient (for
+example, order of insertion matters and glyphs could be packed more tightly
+by pre-sorting by height) but any improvements come at the cost of
+complexity (in implementation).</p><p>The kerning map can also get quite large. One way to reduce its size would
+be to keep track of the most popular kerning gap, set that as a default
+and remove any matching entry. Then, anytime a kerning search returns
+undefined, we can just use the default gap value instead.</p></div></div></div><footer class=footer><div id=footer-large>Site and content created by Iain Crawford
+(<a href=https://github.com/dakodun target=_blank>dakodun</a>).<br>Generated by
+<a href=https://gohugo.io/ target=_blank>Hugo</a>.
+Deployed using
+<a href=https://github.com/features/actions target=_blank>GitHub Actions</a>.</div><div id=footer-small>By Iain Crawford
+(<a href=https://github.com/dakodun target=_blank>dakodun</a>)<br>w/ <a href=https://gohugo.io/ target=_blank>Hugo</a> &
+    <a href=https://github.com/features/actions target=_blank>GitHub Actions</a>.</div></footer></div></body></html>
