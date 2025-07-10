@@ -1,5 +1,11 @@
 <!-- wrap code inside in blog tags -->
 
 <div class="blog">
+  {{ with $.Page }}
+    <h2>{{ .Title }}</h2>
+    <h3>{{ .Date | time.Format "2 January, 2006" }}</h3>
+    <hr />
+  {{ end }}
+
   {{ .Inner }}
 </div>
