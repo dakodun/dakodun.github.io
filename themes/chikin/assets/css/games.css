@@ -1206,24 +1206,152 @@ whitespace (flex display of parent replaces this behaviour) */
 /* . --- --- --- --- --- --- . */
 /* | BEGIN SHELF STYLING ... | */
 /* '-------------------------' */
-/* SHELF ITEM TABBER */
-.shelf .item-tabber {
-  width: 40px;
-  height: 124px;
+/* MAIN SHELF WRAPPER */
+.shelf {
+  position: relative;
+  margin: 0px;
+  padding: 16px 0px 0px 0px;
+
+  display: grid;
+
+  grid-template-rows: 16px auto 48px 24px;
+  grid-template-columns: 64px auto 64px;
+  grid-template-areas:
+    "left     top  right"
+    "left  middle  right"
+    "left  bottom  right"
+    "left    base  right";
+}
+
+/* SHELF CONTENT WRAPPER */
+.shelf .shelf-contents {
+  grid-area: middle;
+
+  position: relative;
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+
+  /* using gap to space items horizontally triggers a wrap
+  early so instead size items up in the x-axis */
+  gap: 16px 0px;
+
+  background-image:
+    /* shelf underside */
+    repeating-linear-gradient(
+      var(--theme-games-content-color-light) 0px,
+      var(--theme-games-content-color) 2px,
+      var(--theme-games-main-color) 36px,
+      var(--theme-games-main-color-dark) 62px,
+      #0a122ca8 64px,
+      transparent 64px, transparent 146px
+    ),
+    
+    /* shelf back shadow */
+    repeating-linear-gradient(
+      #0a122cde 0px,
+      transparent 146px
+    ),
+
+    /* shelf back */
+    repeating-linear-gradient(
+      var(--theme-games-content-color-dark) 0px,
+      var(--theme-games-content-color-dark) 130px,
+      transparent 130px, transparent 146px
+    ),
+
+    /* shelf */
+    linear-gradient(
+      90deg,
+      var(--theme-games-main-color-dark),
+
+      var(--theme-games-main-color) 32px,
+      var(--theme-games-main-color) calc(100% - 32px),
+
+      var(--theme-games-main-color-dark)
+    );
+
+  z-index: 2;
+}
+
+.shelf .shelf-contents::before {
+  content: "";
+
+  width: 100%;
+  height: 100%;
 
   position: absolute;
-  z-index: -1;
+  left: 0px;
+  right: 0px;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      transparent calc(100% - 51px),
+      var(--theme-games-main-color-dark) calc(100% - 50px),
+      var(--theme-games-main-color) 100%
+    );
+    
+  
+  mask-image:
+    /* perspective */
+    linear-gradient(
+      130deg,
+      transparent calc(100% - 94px),
+      white calc(100% - 93px),
+      white 100%
+    ),
+
+    /* vertical shelf spacing */
+    linear-gradient(
+      white, white 130px,
+      transparent 130px, transparent 146px
+    );
+  
+  mask-composite: intersect;
+  mask-repeat: repeat-y;
+  mask-size: 100% 146px;
+}
+
+.shelf .shelf-contents::after {
+  /* fill the empty space on the last (flex-wrapped) row
+  to prevent sparse items being spaced too far apart */
+
+  content: "";
+  
+  flex: auto;
 }
 
 
+/* SHELF ITEM TABBER */
+.shelf .item-tabber {
+  --width: 38px;
+  --height: 130px;
+  
+  width: var(--width);
+  height: var(--height);
+
+  position: absolute;
+
+  z-index: -1;
+}
+
+/* SHELF ITEM */
 .shelf .shelf-item {
   --lazybg: url("");
+  --lazybg-o: url("");
   --lazycol: #AAAAAA;
-  --width: 120px;
-  --height: 240px;
 
-  width: 40px;
-  height: 130px;
+  --width: 40px;
+  --height: 130px;
+  --bottom: -5px;
+  --left: 0px;
+  --extend: 10px;
+
+  width: var(--width);
+  height: var(--height);
 
   position: relative;
   z-index: 3;
@@ -1233,8 +1361,8 @@ whitespace (flex display of parent replaces this behaviour) */
   content: "";
 
   display: block;
-  width: calc(var(--width) * 0.5);
-  height: calc(var(--height) * 0.5);
+  width: 120px;
+  height: 240px;
 
   background-image: var(--lazybg);
   background-color: var(--lazycol);
@@ -1243,15 +1371,19 @@ whitespace (flex display of parent replaces this behaviour) */
   background-size: 100%;
 
   position: absolute;
-  right: 0px;
-
+  bottom: var(--bottom);
+  left: var(--left);
+  
   pointer-events: none;
   filter: drop-shadow(8px 0px 4px #0b0b14a0);
 }
 
-.shelf .shelf-item:hover::after,
-.shelf .shelf-item:active::after,
+.shelf .shelf-item:has(.item-tabber:hover)::after,
+.shelf .shelf-item:has(.item-tabber:active)::after,
 .shelf .shelf-item:has(.item-tabber:focus)::after {
+  /* we use the "tabber" element to detect when interacting
+  with shelf item */
+
   content: "";
 
   display: none;
@@ -1261,18 +1393,18 @@ whitespace (flex display of parent replaces this behaviour) */
 .shelf .shelf-item::before {
   content: "";
 
-  width: calc(var(--width) * 0.75);
-  height: calc(var(--height) * 0.75);
+  width: 120px;
+  height: 240px;
   
-  background-image: var(--lazybg);
+  background-image: var(--lazybg-o);
   background-color: var(--lazycol);
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 100%;
 
   position: absolute;
-  left: -12px;
-  bottom: 8px;
+  bottom: var(--bottom);
+  left: calc(var(--left) + var(--extend));
 
   display: none;
 
@@ -1280,241 +1412,151 @@ whitespace (flex display of parent replaces this behaviour) */
   filter: drop-shadow(8px 0px 4px #0b0b14a0);
 }
 
-.shelf .shelf-item:hover::before,
-.shelf .shelf-item:active::before,
+.shelf .shelf-item:has(.item-tabber:hover)::before,
+.shelf .shelf-item:has(.item-tabber:active)::before,
 .shelf .shelf-item:has(.item-tabber:focus)::before {
-  /*  */
-
   content: "";
 
   display: block;
+}
+
+/* SHELF SURROUNDING CONSTRUCT */
+.shelf .shelf-left {
+  grid-area: left;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      var(--theme-games-main-color-dark),
+      var(--theme-games-main-color),
+      var(--theme-games-main-color) calc(100% - 14px),
+      
+      var(--theme-games-main-color-light)  calc(100% - 14px),
+      var(--theme-games-main-color-light)  calc(100% - 13px),
+
+      var(--theme-games-main-color) calc(100% - 12px),
+      var(--theme-games-main-color) calc(100% - 2px),
+
+      var(--theme-games-main-color) calc(100% - 2px),
+      var(--theme-games-main-color-dark) 100%
+    );
+  
+  mask-image:
+    linear-gradient(
+      130deg,
+      transparent 38px,
+      white 39px,
+      white
+    );
+
+  z-index: 5;
+}
+
+.shelf .shelf-top,
+.shelf .shelf-bottom {
+  background-image:
+    linear-gradient(
+      90deg,
+      var(--theme-games-main-color-dark),
+
+      var(--theme-games-main-color) 32px,
+      var(--theme-games-main-color) calc(100% - 32px),
+
+      var(--theme-games-main-color-dark)
+    );
+
+  z-index: 1;
+}
+
+.shelf .shelf-top {
+  grid-area: top;
+}
+
+.shelf .shelf-bottom {
+  grid-area: bottom;
+}
+
+.shelf .shelf-right {
+  grid-area: right;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      var(--theme-games-main-color-light),
+      var(--theme-games-main-color-light) 1px,
+
+      var(--theme-games-main-color) 2px,
+      var(--theme-games-main-color) 12px,
+
+      var(--theme-games-main-color) 12px,
+      var(--theme-games-main-color-dark) 3px,
+
+      transparent 3px
+    );
+
+
+  z-index: 1;
+}
+
+.shelf .shelf-base {
+  grid-area: base;
+
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  left: 0px;
+  right: 0px;
+
+  background-image:
+    linear-gradient(
+      90deg,
+      transparent 0%, transparent calc(100% - 51px),
+      var(--theme-games-main-color-dark) calc(100% - 51px),
+      var(--theme-games-main-color) 100%
+    );
+
+  z-index: 1;
+}
+
+.shelf .shelf-base::before {
+  content: "";
+
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  left: 0px;
+  right: 0px;
+
+  background-image:
+    linear-gradient(
+      var(--theme-games-content-color-light) 0px,
+      var(--theme-games-content-color) 2px,
+      var(--theme-games-main-color) 6px,
+      transparent 6px, transparent 100%
+    );
+  
+  mask-image:
+    /* perspective */
+    linear-gradient(
+      130deg,
+      white calc(100% - 15px),
+      transparent calc(100% - 14px),
+      transparent 100%
+    );
+
+  z-index: 1;
 }
 
 
 /* shelf... */
 /* main shelf construct--- */
 /* contains colour variables and layout attributes */
-.shelf {
-  position: relative;
-  margin: 0px;
-  padding: 12px 12px 0px 12px;
 
-  display: grid;
-  grid-template: 100% / 16px auto;
-}
-
-/* the blurred back shadow of the whole shelf */
-.shelf::before {
-  content: "";
-
-  width: 100%;
-  height: calc(100% + 36px);
-
-  position: absolute;
-  left: 0px;
-  top: 0px;
-
-  display: block;
-
-  background-image:
-  linear-gradient(
-    100deg,
-    transparent 16px,
-    var(--theme-games-shadow) 16px
-  );
-
-  filter: blur(8px);
-
-  /* glow goes at the back */
-  z-index: 0;
-}
 /* ---main shelf construct */
 
 
-/* shelf side perspectives--- */
-.shelf .shelf-left-p {
-  background-image:
-    linear-gradient(
-      90deg,
-      var(--theme-games-main-color-dark),
-      var(--theme-games-main-color)
-    );
-  
-  mask-image:
-    linear-gradient(
-      100deg,
-      transparent 15px,
-      white 16px,
-      white
-    );
-  
-  z-index: 1;
-}
-
-.shelf .shelf-right-p {
-  width: 16px;
-  height: 100%;
-  
-  position: absolute;
-  right: 0px;
-  top: 0px;
-
-  background-image:
-    linear-gradient(
-      90deg,
-      var(--theme-games-main-color-dark),
-      var(--theme-games-main-color)
-    );
-  
-  mask-image:
-    linear-gradient(
-      104deg,
-      transparent 15px,
-      white 16px,
-      white
-    ),
-    linear-gradient(
-      white, white 118px,
-      transparent 118px, transparent 130px
-    );
-  
-  mask-composite: intersect;
-  mask-repeat: repeat-y;
-  mask-size: 16px 130px;
-  
-  z-index: 1;
-}
-/* ---shelf side perspectives */
-
-
-.shelf .shelf-body {
-  display: grid;
-  grid-template: 100% / 16px auto 16px;
-}
-
-.shelf .shelf-top, .shelf .shelf-bottom,
-.shelf .shelf-body .shelf-left,
-.shelf .shelf-body .shelf-right {
-  position: relative;
-  background-image:
-    linear-gradient(
-      90deg,
-      var(--theme-games-main-color-light) 0%,
-      var(--theme-games-main-color-light) 1px,
-
-      var(--theme-games-main-color) 2px,
-      var(--theme-games-main-color) calc(100% - 2px),
-
-      var(--theme-games-main-color-dark) calc(100% - 1px),
-      var(--theme-games-main-color-dark) 100%
-    );
-}
-
-.shelf .shelf-top {
-  height: 16px;
-  z-index: 1;
-}
-
-.shelf .shelf-bottom {
-  height: 48px;
-  z-index: 2;
-}
-
-.shelf .shelf-body .shelf-left {
-  z-index: 3;
-}
-
-.shelf .shelf-body .shelf-right {
-  z-index: 1;
-}
-
-.shelf .shelf-body .shelf-contents {
-  position: relative;
-  display: flex;
-  
-  flex-wrap: wrap;
-  flex-direction: row-reverse;
-  background-image:
-    /* shelf bottom perspective */
-    repeating-linear-gradient(
-      var(--theme-games-content-color-light) 0px,
-      var(--theme-games-content-color) 2px,
-      var(--theme-games-main-color) 36px,
-      var(--theme-games-main-color-dark) 62px,
-      #0a122ca8 64px,
-      transparent 64px, transparent 130px
-    ),
-    
-    /* shelf back shadow */
-    repeating-linear-gradient(
-      #0a122cde 0px,
-      transparent 130px
-    ),
-
-    /* shelf back */
-    repeating-linear-gradient(
-      var(--theme-games-content-color-dark) 0px,
-      var(--theme-games-content-color-dark) 118px,
-      transparent 118px, transparent 130px
-    ),
-
-    /* shelf edge shadow */
-    linear-gradient(
-      90deg,
-      #33050f50 0%,
-      #33050f50 4px,
-      
-      transparent 24px,
-      transparent calc(100% - 24px),
-
-      #33050f50 calc(100% - 4px),
-      #33050f50 100%
-    ),
-
-    /* shelf */
-    linear-gradient(
-      90deg,
-      var(--theme-games-content-color) 0%,
-      var(--theme-games-content-color) 20px,
-      
-      var(--theme-games-content-color-light) 80px,
-      var(--theme-games-content-color-light) calc(100% - 120px),
-
-      var(--theme-games-content-color) calc(100% - 20px),
-      var(--theme-games-content-color) 100%
-    );
-
-    z-index: 2;
-}
-
-.shelf-base {
-  /* ~~~ */
-  --color-dark: var(--theme-games-main-color-dark);
-  --color: var(--theme-games-main-color);
-  --color-light: var(--theme-games-main-color-light);
-
-  position: relative;
-  width: 100%;
-  height: 32px;
-
-  background-image:
-    linear-gradient(
-      90deg,
-      transparent 12px,
-      var(--color-dark) 12px, var(--color) 28px,
-      var(--color-light) 28px, var(--color-light) 29px,
-      var(--color) 30px, var(--color) 42px,
-      var(--color-dark) 43px, var(--color-dark) 44px,
-
-      transparent 44px, transparent calc(100% - 44px),
-
-      var(--color-dark) calc(100% - 44px), var(--color) calc(100% - 28px),
-      var(--color-light) calc(100% - 28px), var(--color-light) calc(100% - 27px),
-      var(--color) calc(100% - 26px), var(--color) calc(100% - 14px),
-      var(--color-dark) calc(100% - 13px), var(--color-dark) calc(100% - 12px),
-      transparent calc(100% - 12px), transparent 100%
-    )
-}
 /* . --- --- --- --- --- --- . */
 /* | ...   END SHELF STYLING | */
 /* '-------------------------' */

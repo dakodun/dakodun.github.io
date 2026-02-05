@@ -2,6 +2,7 @@
 [params]
   name = "Resident Evil: Code Veronica"
   platform = "Dreamcast"
+  region = ""
   id = "dreamcast-recv"
 
   screens = [

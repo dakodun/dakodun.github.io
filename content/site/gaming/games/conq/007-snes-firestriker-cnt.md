@@ -2,6 +2,7 @@
 [params]
   name = "Firestriker"
   platform = "SNES"
+  region = "ntsc"
   id = "snes-firestriker"
 
   screens = [

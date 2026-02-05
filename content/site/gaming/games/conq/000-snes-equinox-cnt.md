@@ -2,6 +2,7 @@
 [params]
   name = "Equinox"
   platform = "SNES"
+  region = "pal"
   id = "snes-equinox"
 
   screens = []

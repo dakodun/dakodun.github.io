@@ -2,6 +2,7 @@
 [params]
   name = "Super Mario World 2"
   platform = "SNES"
+  region = "pal"
   id = "snes-smw2"
 
   screens = [["smw2-menu", "6 Stars"]]

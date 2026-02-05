@@ -2,6 +2,7 @@
 [params]
   name = "Operation: WinBack"
   platform = "N64"
+  region = ""
   id = "n64-winback"
 
   screens = [["winback-end", "Ending Score"]]

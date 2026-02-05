@@ -2,6 +2,7 @@
 [params]
   name = "Silver"
   platform = "Dreamcast"
+  region = ""
   id = "dreamcast-silver"
 
   screens = [

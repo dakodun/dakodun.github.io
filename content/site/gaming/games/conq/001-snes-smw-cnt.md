@@ -2,6 +2,7 @@
 [params]
   name = "Super Mario World"
   platform = "SNES"
+  region = "pal"
   id = "snes-smw"
   
   screens = [["smw-menu", "96 Exits"]]

@@ -2,6 +2,7 @@
 [params]
   name = "Alone in the Dark: The New Nightmare"
   platform = "Dreamcast"
+  region = ""
   id = "dreamcast-alone4"
 
   screens = []

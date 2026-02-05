@@ -1,12 +1,80 @@
 <!-- relative paths of resource folders  -->
 {{ $contentloc := "conq/" }}
-{{ $iconsloc   := "conq/icons/" }}
+{{ $shelfloc   := "conq/shelf/" }}
 
 <!-- get a list of all content files in conq folder  -->
-{{ $md_ := printf "%s" "*-cnt.md" |
-           printf "%s%s" $contentloc |
-           printf "%s" }}
-{{ $md  := $.Page.Resources.Match $md_ }}
+{{ $md := $.Page.Resources.Match (
+  printf "%s" "*-cnt.md" |
+  printf "%s%s" $contentloc |
+  printf "%s"
+) }}
+
+<!-- loop over content files and create a collection of maps
+that hold platform specific sizing information (and sort order) -->
+{{ $pages := slice }}
+{{ range $md}}
+  <!-- create suitable defaults -->
+  {{ $_sort := "" }}
+
+  {{ $_left   := -36 }}
+  {{ $_width  :=  38 }}
+
+  {{ $_height := 130 }}
+  {{ $_bottom :=  -5 }}
+  {{ $_extend :=  10 }}
+
+  <!-- modify values based on platform -->
+  {{ if eq .Params.platform "N64" }}
+    <!-- N64 (wdth: 74, lft: 40)-->
+    {{ $_sort = "00" }}
+
+    {{ $_left = -30 }}
+    {{ $_width = (math.Add 74 $_left) }}
+
+    {{ $_extend = 0 }}
+  {{ else if eq .Params.platform "SNES" }}
+    <!-- SNES (wdth: 67, lft: 39)-->
+    {{ $_sort = "10" }}
+
+    {{ $_left = -29 }}
+    {{ $_width = (math.Add 67 $_left) }}
+
+    {{ $_extend = 0 }}
+  {{ else if eq .Params.platform "Dreamcast" }}
+    <!-- Dreamcast (wdth: 42, lft: 27)-->
+    {{ $_sort = "20" }}
+
+    {{ $_left = -17 }}
+    {{ $_width = (math.Add 42 $_left) }}
+
+    {{ $_extend = 0 }}
+  {{ else if eq .Params.platform "GBA" }}
+    <!-- GBA  (wdth: 44, lft: 24)-->
+    {{ $_sort = "30" }}
+
+    {{ $_left = -14 }}
+    {{ $_width = (math.Add 44 $_left) }}
+    
+    {{ $_extend = 0 }}
+  {{ end }}
+
+  <!-- create final map linking page to values -->
+  {{ $pages = $pages | append (dict 
+    "page" .
+    
+    "platform" (
+      printf "%s" .Params.platform |
+      printf "%s%s" $_sort |
+      printf "%s"
+    )
+    
+    "width" $_width
+    "height" $_height
+    "bottom" $_bottom
+    "left" $_left
+    "extend" $_extend
+  ) }}
+{{ end }}
 
 <div class="top-info" style="margin: 32px auto 0px;">
   <div>
@@ -17,81 +85,88 @@
 </div>
 
 <div class="shelf">
-  <div class="shelf-left-p">
+  <div class="shelf-left">
     <!--  -->
   </div>
 
-  <div>
-    <div class="shelf-top">
-      <!-- I'm structurally important! -->
-    </div>
+  <div class="shelf-top">
+    <!--  -->
+  </div>
 
-    <div class="shelf-body">
-      <div class="shelf-left">
-        <!--  -->
-      </div>
+  <div id="shelf-c" class="shelf-contents">
+    <!-- for all conquered games (*-cnt.md) -->
+    {{ range (sort $pages "platform" "asc") }}
+      <!-- set shelf image to platform default initially
+      (if i haven't made the actual one yet (sorry)) and
+      then attempt to load game's image and update if it
+      exists -->
 
-      <div id="shelf-c" class="shelf-contents">
-        <!-- placeholder image for when i've not got around to
-        making the actual one yet (sorry) -->
-        {{ $deficon_ := printf "%s" "default.png" |
-                        printf "%s%s" $iconsloc |
-                        printf "%s" }}
-        {{ $deficon  := $.Page.Resources.GetMatch $deficon_ }}
+      <!-- closed image -->
+      {{ $closedurl := ($.Page.Resources.GetMatch (
+        printf "%s" "-c.png" |
+        printf "%s%s" .page.Params.region |
+        printf "%s%s" (lower .page.Params.platform) |
+        printf "%s%s" "default/" |
+        printf "%s%s" $shelfloc |
+        printf "%s"
+      )).RelPermalink }}
 
-        {{ $deficonURL := "" }}
-        {{ if $deficon }}
-          {{ $deficonURL = $deficon.RelPermalink }}
-        {{ end }}
+      {{ $closed := $.Page.Resources.GetMatch (
+        printf "%s" "-c.png" |
+        printf "%s%s" .page.Params.id |
+        printf "%s%s" $shelfloc |
+        printf "%s"
+      ) }}
 
-        <!-- for all conquered games (*-cnt.md) -->
-        {{ range $md }}
-          <!-- get the icon matching content name from resources -->
-          {{ $icon_ := printf "%s" "-sm.png" |
-                        printf "%s%s" .Params.id |
-                        printf "%s%s" $iconsloc |
-                        printf "%s" }}
-          {{ $icon  := $.Page.Resources.GetMatch $icon_ }}
-          
-          {{ $plat   := .Params.platform | default "" }}
-          {{ $width  := 120 }}
-          {{ $height := 240 }}
-          
-          {{ if eq $plat "Wii" }}
-            {{ $width = 100 }}
-          {{ end }}
+      {{ if $closed }}
+        {{ $closedurl = $closed.RelPermalink }}
+      {{ end }}
 
-          <!-- set icon to default until overridden -->
-          {{ $iconURL := $deficonURL }}
-          {{ if $icon }}
-            {{ $iconURL = $icon.RelPermalink }}
-          {{ end }}
+      <!-- open image -->
+      {{ $openurl := ($.Page.Resources.GetMatch (
+        printf "%s" "-o.png" |
+        printf "%s%s" .page.Params.region |
+        printf "%s%s" (lower .page.Params.platform) |
+        printf "%s%s" "default/" |
+        printf "%s%s" $shelfloc |
+        printf "%s"
+      )).RelPermalink }}
 
-          <div class="shelf-item lazyload" alt="{{ .Params.name }} Shelf Item"
-          title="{{ .Params.name }}"
-          style="--lazybg: url('{{ $iconURL }}'); --lazycol: #4D5A6860;
-          --width: {{ $width }}px; --height: {{ $height }}px;">
-            <!--  -->
-            <div class="item-tabber" tabindex="0"></div>
-          </div>
-        {{ end }}
+      {{ $open := $.Page.Resources.GetMatch (
+        printf "%s" "-o.png" |
+        printf "%s%s" .page.Params.id |
+        printf "%s%s" $shelfloc |
+        printf "%s"
+      ) }}
 
-        <div class="shelf-right-p">
+      {{ if $open }}
+        {{ $openurl = $open.RelPermalink }}
+      {{ end }}
+
+      <div class="shelf-item lazyload" alt="{{ .page.Params.name }} Shelf Item"
+      title="{{ .page.Params.name }}"
+      style="--lazybg: url('{{ $closedurl }}');
+      --lazybg-o: url('{{ $openurl }}');
+      --lazycol: #4D5A6860; --width: {{ .width }}px;
+      --height: {{ .height }}px; --bottom: {{ .bottom }}px;
+      --left: {{ .left }}px; --extend: {{ .extend }}px;">
+        <div class="item-tabber" style="--width: {{ .width }}px;
+        --height: {{ .height }}px;" tabindex="0">
           <!--  -->
         </div>
       </div>
-
-      <div class="shelf-right">
-        <!--  -->
-      </div>
-    </div>
-
-    <div class="shelf-bottom">
-      <!-- I'm (slightly less) structurally important! -->
-    </div>
+    {{ end }}
   </div>
-</div>
 
-<div class="shelf-base">
-  <!--  -->
+  <div class="shelf-bottom">
+    <!--  -->
+  </div>
+
+  <div class="shelf-right">
+    <!--  -->
+  </div>
+
+  <div class="shelf-base">
+    <!--  -->
+  </div>
 </div>
