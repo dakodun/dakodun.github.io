@@ -31,7 +31,7 @@ that hold platform specific sizing information (and sort order) -->
     {{ $_left = -30 }}
     {{ $_width = (math.Add 74 $_left) }}
 
-    {{ $_extend = 0 }}
+    {{ $_extend = 24 }}
   {{ else if eq .Params.platform "SNES" }}
     <!-- SNES (wdth: 67, lft: 39)-->
     {{ $_sort = "10" }}
@@ -39,15 +39,15 @@ that hold platform specific sizing information (and sort order) -->
     {{ $_left = -29 }}
     {{ $_width = (math.Add 67 $_left) }}
 
-    {{ $_extend = 0 }}
+    {{ $_extend = 20 }}
   {{ else if eq .Params.platform "Dreamcast" }}
-    <!-- Dreamcast (wdth: 42, lft: 27)-->
+    <!-- Dreamcast (wdth: 44, lft: 27)-->
     {{ $_sort = "20" }}
 
     {{ $_left = -17 }}
-    {{ $_width = (math.Add 42 $_left) }}
+    {{ $_width = (math.Add 44 $_left) }}
 
-    {{ $_extend = 0 }}
+    {{ $_extend = 10 }}
   {{ else if eq .Params.platform "GBA" }}
     <!-- GBA  (wdth: 44, lft: 24)-->
     {{ $_sort = "30" }}
@@ -55,7 +55,7 @@ that hold platform specific sizing information (and sort order) -->
     {{ $_left = -14 }}
     {{ $_width = (math.Add 44 $_left) }}
     
-    {{ $_extend = 0 }}
+    {{ $_extend = 10 }}
   {{ end }}
 
   <!-- create final map linking page to values -->
