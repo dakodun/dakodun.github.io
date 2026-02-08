@@ -1231,7 +1231,7 @@ whitespace (flex display of parent replaces this behaviour) */
 
   display: flex;
   flex-wrap: wrap;
-  flex-direction: row-reverse;
+  flex-direction: row;
   justify-content: space-around;
 
   /* using gap to space items horizontally triggers a wrap
@@ -1243,10 +1243,10 @@ whitespace (flex display of parent replaces this behaviour) */
     repeating-linear-gradient(
       var(--theme-games-content-color-light) 0px,
       var(--theme-games-content-color) 2px,
-      var(--theme-games-main-color) 36px,
-      var(--theme-games-main-color-dark) 62px,
-      #0a122ca8 64px,
-      transparent 64px, transparent 146px
+      var(--theme-games-main-color) 26px,
+      var(--theme-games-main-color-dark) 42px,
+      #0a122c66 43px,
+      transparent 43px, transparent 146px
     ),
     
     /* shelf back shadow */
@@ -1289,19 +1289,18 @@ whitespace (flex display of parent replaces this behaviour) */
   background-image:
     linear-gradient(
       90deg,
-      transparent calc(100% - 51px),
-      var(--theme-games-main-color-dark) calc(100% - 50px),
-      var(--theme-games-main-color) 100%
+      var(--theme-games-main-color),
+      var(--theme-games-main-color-dark) 50px,
+      transparent 51px
     );
     
   
   mask-image:
     /* perspective */
     linear-gradient(
-      130deg,
-      transparent calc(100% - 94px),
-      white calc(100% - 93px),
-      white 100%
+      40deg,
+      white 111px,
+      transparent 112px
     ),
 
     /* vertical shelf spacing */
@@ -1372,10 +1371,10 @@ whitespace (flex display of parent replaces this behaviour) */
 
   position: absolute;
   bottom: var(--bottom);
-  left: var(--left);
+  right: var(--left);
   
   pointer-events: none;
-  filter: drop-shadow(8px 0px 4px #0b0b14a0);
+  filter: drop-shadow(-8px 0px 4px #0b0b14a0);
 }
 
 .shelf .shelf-item:has(.item-tabber:hover)::after,
@@ -1404,12 +1403,12 @@ whitespace (flex display of parent replaces this behaviour) */
 
   position: absolute;
   bottom: var(--bottom);
-  left: calc(var(--left) + var(--extend));
+  right: calc(var(--left) + var(--extend));
 
   display: none;
 
   pointer-events: none;
-  filter: drop-shadow(8px 0px 4px #0b0b14a0);
+  filter: drop-shadow(-8px 0px 4px #0b0b14a0);
 }
 
 .shelf .shelf-item:has(.item-tabber:hover)::before,
@@ -1423,33 +1422,33 @@ whitespace (flex display of parent replaces this behaviour) */
 /* SHELF SURROUNDING CONSTRUCT */
 .shelf .shelf-left {
   grid-area: left;
-
+  
   background-image:
     linear-gradient(
       90deg,
-      var(--theme-games-main-color-dark),
-      var(--theme-games-main-color),
-      var(--theme-games-main-color) calc(100% - 14px),
+      transparent,
+      transparent calc(100% - 14px),
       
-      var(--theme-games-main-color-light)  calc(100% - 14px),
-      var(--theme-games-main-color-light)  calc(100% - 13px),
+      var(--theme-games-main-color-dark)  calc(100% - 14px),
+      var(--theme-games-main-color-dark)  calc(100% - 13px),
 
       var(--theme-games-main-color) calc(100% - 12px),
       var(--theme-games-main-color) calc(100% - 2px),
 
-      var(--theme-games-main-color) calc(100% - 2px),
-      var(--theme-games-main-color-dark) 100%
-    );
-  
-  mask-image:
-    linear-gradient(
-      130deg,
-      transparent 38px,
-      white 39px,
-      white
+      var(--theme-games-main-color-light) calc(100% - 1px),
+      var(--theme-games-main-color-light) 100%
     );
 
-  z-index: 5;
+
+  z-index: 1;
+}
+
+.shelf .shelf-top {
+  grid-area: top;
+}
+
+.shelf .shelf-bottom {
+  grid-area: bottom;
 }
 
 .shelf .shelf-top,
@@ -1468,34 +1467,34 @@ whitespace (flex display of parent replaces this behaviour) */
   z-index: 1;
 }
 
-.shelf .shelf-top {
-  grid-area: top;
-}
-
-.shelf .shelf-bottom {
-  grid-area: bottom;
-}
-
 .shelf .shelf-right {
   grid-area: right;
 
   background-image:
     linear-gradient(
       90deg,
-      var(--theme-games-main-color-light),
-      var(--theme-games-main-color-light) 1px,
+      var(--theme-games-main-color-dark),
+      var(--theme-games-main-color-dark) 1px,
 
       var(--theme-games-main-color) 2px,
-      var(--theme-games-main-color) 12px,
+      var(--theme-games-main-color) 11px,
 
-      var(--theme-games-main-color) 12px,
-      var(--theme-games-main-color-dark) 3px,
+      var(--theme-games-main-color-light) 12px,
+      var(--theme-games-main-color-light) 13px,
 
-      transparent 3px
+      var(--theme-games-main-color) 13px,
+      var(--theme-games-main-color-dark)
+    );
+  
+  mask-image:
+    linear-gradient(
+      220deg,
+      transparent 32px,
+      white 33px,
+      white
     );
 
-
-  z-index: 1;
+  z-index: 5;
 }
 
 .shelf .shelf-base {
@@ -1511,9 +1510,9 @@ whitespace (flex display of parent replaces this behaviour) */
   background-image:
     linear-gradient(
       90deg,
-      transparent 0%, transparent calc(100% - 51px),
-      var(--theme-games-main-color-dark) calc(100% - 51px),
-      var(--theme-games-main-color) 100%
+      var(--theme-games-main-color),
+      var(--theme-games-main-color-dark) 51px,
+      transparent 51px, transparent
     );
 
   z-index: 1;
@@ -1540,23 +1539,14 @@ whitespace (flex display of parent replaces this behaviour) */
   mask-image:
     /* perspective */
     linear-gradient(
-      130deg,
-      white calc(100% - 15px),
-      transparent calc(100% - 14px),
-      transparent 100%
+      40deg,
+      transparent,
+      transparent 18px,
+      white 19px
     );
 
   z-index: 1;
 }
-
-
-/* shelf... */
-/* main shelf construct--- */
-/* contains colour variables and layout attributes */
-
-/* ---main shelf construct */
-
-
 /* . --- --- --- --- --- --- . */
 /* | ...   END SHELF STYLING | */
 /* '-------------------------' */
