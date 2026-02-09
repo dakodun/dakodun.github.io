@@ -28,10 +28,10 @@ page (carts, cds and the like)"""
   - [Dreamcast CD and Case (PAL) (.zip archive)][dl-dreamcast]  
   - [GBA Cart and Box (.zip archive)][dl-gba]  
 
-  [dl-snes]: snes.zip (Download SNES Cart \(PAL/NTSC\) archive)
-  [dl-n64]: n64.zip (Download SNES Cart archive)
-  [dl-dreamcast]: dreamcast.zip (Download Dreamcast CD \(PAL\) archive)
-  [dl-gba]: gba.zip (Download GBA Cart archive)
+  [dl-snes]: snes_new.zip (Download SNES Cart \(PAL/NTSC\) archive)
+  [dl-n64]: n64_new.zip (Download SNES Cart archive)
+  [dl-dreamcast]: dreamcast_new.zip (Download Dreamcast CD \(PAL\) archive)
+  [dl-gba]: gba_new.zip (Download GBA Cart archive)
 {{< /blog/embox >}}
 
 {{% blog/markdown %}}
@@ -39,6 +39,9 @@ page (carts, cds and the like)"""
   I couldn't find any readily available. They allow me to quickly render
   carts and CDs of a variety of games (at the correct perspective and size) by
   simply changing a couple of textures; feel free to use them as you please.
+
+  (The files consist of a box (or case) model, and a cart (or cd) model. A
+  simple animation moves between closed and open states).
 
   [games]: {{% ref "site/gaming/games/" %}} (chikin.net - games)
 {{% /blog/markdown %}}
